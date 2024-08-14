@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btnPrincipal {
+    @apply block w-full max-w-xs mx-auto bg-primary hover:bg-primaryHover focus:bg-primaryHover text-white rounded-lg px-3 py-3 font-semibold
+}
