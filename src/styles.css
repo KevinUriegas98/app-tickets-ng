@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.btnPrincipal {
-    @apply block w-full max-w-xs mx-auto bg-primary hover:bg-primaryHover focus:bg-primaryHover text-white rounded-lg px-3 py-3 font-semibold
+a {
+    cursor:pointer;
+}
+
+.btnLogin {
+    @apply block w-full max-w-xs mx-auto rounded-lg px-3 py-3 font-semibold bg-light-btn-bg hover:bg-light-btn-hover dark:bg-dark-btn-bg dark:hover:bg-dark-btn-hover text-white
+}
+
+.btn {
+    @apply w-[200px] mx-auto px-5 py-2.5 me-2 rounded-lg font-semibold bg-light-btn-bg hover:bg-light-btn-hover dark:bg-dark-btn-bg dark:hover:bg-dark-btn-hover text-white
 }

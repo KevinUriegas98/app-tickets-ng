@@ -1,12 +1,10 @@
-<div class="min-w-screen min-h-screen bg-secondary flex items-center justify-center px-5 py-5">
-  <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
-      <div class="flex w-full justify-center">
-          <div class="mb-[50px]">
-            <img [src]="images.notfound" class="img-fluid rounded"/>
-            <p class="text-2xl font-bold">404 - Página No Encontrada.</p>
-            <p class="text-lg italic">You didn't break the internet, but we can't find what you are looking for.</p>
-            <a href="/home" class="font-bold mt-2 underline">Regresar al Inicio</a>
-          </div>
-      </div>
+<div class="w-screen h-screen bg-gray-100 flex justify-center bg-light-bg border border-light-border dark:bg-dark-bg dark:border-dark-border">
+  <div>
+    <img [src]="images.notfound" class="img-fluid rounded"/>
+    <p class="text-2xl text-light-text dark:text-dark-text">404 - Página No Encontrada.</p> <br>
+    <p class="text-lg text-light-text dark:text-dark-text">You didn't break the internet, but we can't find what you are looking for.</p>
+    <p class="mt-3">
+      <a href="/home" class="font-bold btn">Regresar al Inicio</a>
+    </p>
   </div>
 </div>

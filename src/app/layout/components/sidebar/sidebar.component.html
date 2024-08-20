@@ -1,0 +1,71 @@
+<aside id="logo-sidebar" class="flex flex-col fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <div class="flex-1 px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <a href="#" class="flex items-center ps-2.5 mb-5">
+            <img [src]="images.logoNg" class="rounded-lg" alt="Logo" class="sm:h-7" width="30px">
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">&nbsp; HelpDesk</span>
+        </a>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'home']" size="lg"></fa-icon>
+                    <span class="ms-3">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'file-pen']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Nuevo Ticket</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'rectangle-list']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Mis Tickets</span>
+                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">5</span>
+                </a>
+            </li>
+            <li>
+                <a href="/administracion/personas" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'rectangle-list']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Personas</span>
+                </a>
+            </li>
+            <li>
+                <a href="/administracion/perfiles" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'rectangle-list']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Perfiles</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <label class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group items-center cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer" (click)="toggleDarkMode()" [checked]="savedTheme === 'dark' ? true:false">
+                    <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="flex-1 ms-3 whitespace-nowrap">
+                        <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="icon" size="lg"></fa-icon>
+                    </span>
+                </label>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'circle-user']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{userName}}</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" (click)="logOut()">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'right-from-bracket']" size="lg"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                    <fa-icon class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" [icon]="['fas', 'circle-info']" size="lg"></fa-icon>
+                    <span class="ms-3">Help</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <app-footer></app-footer>
+</aside>
