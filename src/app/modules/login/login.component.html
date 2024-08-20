@@ -1,52 +1,56 @@
-<div class="min-w-screen min-h-screen bg-secondary flex items-center justify-center px-5 py-5">
-    <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
+<div class="min-w-screen min-h-screen bg-light-bg dark:bg-dark-bg flex items-center justify-center px-5 py-5">
+    <div class="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
         <div class="md:flex w-full">
-            <div class="hidden md:block w-1/2 bg-primary py-10 px-10">
+            <div class="hidden md:block w-1/2 bg-light-bg dark:bg-dark-bg py-10 px-10">
                 <img [src]="images.logoDos" class="rounded-lg" alt="Logo">
             </div>
             <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                 <div class="text-center mb-10">
-                    <h1 class="font-semibold italic text-3xl text-gray-900">HelpDesk</h1>
-                    <p class="text-lg italic">Plataforma de HelpDesk para los productos de NG.&#174;</p>
+                    <h1 class="font-semibold italic text-3xl text-gray-900 dark:text-gray-100">HelpDesk</h1>
+                    <p class="text-lg italic text-gray-700 dark:text-gray-300">Plataforma de HelpDesk para los productos de NG.&#174;</p>
                 </div>
                 <div>
                     <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-5">
-                                <label class="text-xs font-semibold px-1">Email:</label>
-                                <div class="flex">
-                                    <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><fa-icon [icon]="['fas', 'user']"></fa-icon></div>
-                                    <input type="email" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-primary" formControlName="usuario" placeholder="nombre@correo.com">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Email:</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                                    </div>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" formControlName="usuario" placeholder="nombre@correo.com">
                                 </div>
-                                <div class="flex justify-center text-sm italic text-danger" *ngIf="form.get('usuario')?.touched && form.get('usuario')?.invalid">
+                                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('usuario')?.touched && form.get('usuario')?.invalid">
                                     <p *ngIf="form.get('usuario')?.errors?.['required']">Usuario Requerido*</p>
                                     <p *ngIf="form.get('usuario')?.errors?.['email']">Correo no válido*</p>
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="flex -mx-3">
-                            <div class="w-full px-3 mb-12">
-                                <label class="text-xs font-semibold px-1">Contraseña:</label>
-                                <div class="flex">
-                                    <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><fa-icon [icon]="['fas', 'lock']"></fa-icon></div>
-                                    <input type="password" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-primary" formControlName="password" placeholder="************">
-                                </div>
-                                <div class="flex justify-center">
-                                    <div class="" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
-                                        <p class="text-sm italic text-danger" *ngIf="form.get('password')?.errors?.['required']">Contraseña Requerida*</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-5">
-                                <button class="btnPrincipal">Ingresar</button>
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*Contraseña:</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                                    </div>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" formControlName="password" placeholder="************">
+                                </div>
+                                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+                                    <p class="text-sm italic text-danger" *ngIf="form.get('password')?.errors?.['required']">Contraseña Requerida*</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex -mx-3">
+                            <div class="w-full px-3 mb-5">
+                                <button class="btnPrincipal">
+                                    Ingresar
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="flex justify-center mt-[30px]">
-                    <p class="text-xs italic">Copyright © {{this.year}} All rights reserved | Made with <fa-icon [icon]="['fas', 'heart']"></fa-icon> by <a href="https://www.ainextgen.mx/" target="_blank">NextGen</a></p>
+                    <p class="text-xs italic text-gray-700 dark:text-gray-300">Copyright © {{this.year}} All rights reserved | Made with <fa-icon [icon]="['fas', 'heart']"></fa-icon> by <a href="https://www.ainextgen.mx/" target="_blank">NextGen</a></p>
                 </div>
             </div>
         </div>
