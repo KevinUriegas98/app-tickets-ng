@@ -1,0 +1,31 @@
+<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th *ngFor="let header of headers" scope="col" class="px-6 py-3">{{ header }}</th>
+          <th *ngIf="hasEdit || hasDelete">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td *ngFor="let key of keys" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ row[key] }}</td>
+            <td *ngIf="hasEdit || hasDelete">
+                <button *ngIf="hasEdit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" (click)="editRow(row)">
+                    <fa-icon 
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 ease-in-out hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500" 
+                        aria-hidden="true" 
+                        [icon]="['fas', 'pen']" 
+                        size="lg">
+                    </fa-icon>
+                </button>
+                <button *ngIf="hasDelete" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3" (click)="deleteRow(row)">
+                    <fa-icon 
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 ease-in-out hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500" 
+                        aria-hidden="true" 
+                        [icon]="['fas', 'trash-can']" 
+                        size="lg">
+                    </fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>    
+</table>
