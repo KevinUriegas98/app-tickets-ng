@@ -1,20 +1,29 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
-//import { HomeComponent } from './layout/components/home/home.component';
+import { LayoutComponent } from './layout/components/layout/layout.component';
 import { NotFoundComponent } from './layout/components/not-found/not-found.component';
+import { nameApp } from '@Constants';
 import { AuthGuard } from '@Guards';
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    title: nameApp + 'LogIn'
   },
-//   {
-//     path: 'home',
-//     component: HomeComponent,
-//     // canActivate:[AuthGuard],
-//     loadChildren: () => import('./modules/dashboard/dashboard.routes').then(m => m.routes),
-//   },
+  {
+    path: 'home',
+    component: LayoutComponent,
+    // canActivate:[AuthGuard],
+    loadChildren: () => import('./modules/home/home.routes').then(m => m.routes),
+    title: nameApp + 'Página Principal'
+  },
+  {
+    path: 'administracion',
+    // canActivate: [authGuardFn],
+    loadChildren: () => import('./modules/administracion/administracion.routes').then(m => m.routes),
+    title: nameApp + 'Administración'
+  },
   {
     path: '',
     redirectTo: 'home',

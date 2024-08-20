@@ -1,0 +1,39 @@
+<div class="w-full p-4 bg-light-bg border border-light-border rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-bg dark:border-dark-border">
+    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+        <h5 class="text-xl font-medium text-light-text dark:text-dark-text">Perfil | Formulario</h5>
+        <div class="grid md:grid-cols-3 md:gap-6">
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Perfil</label>
+                <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Jose Juan"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['required']">Perfil Requerido*</p>
+                </div>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">Descripción</label>
+                <input type="text" formControlName="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Gonzalez"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['required']">Ap Paterno Requerido*</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-light-border dark:border-dark-border">
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="btn">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="relative overflow-x-auto shadow-md w-full p-2 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        keyRow="Id"
+        [headers]="['#','Nombre','Descripcion']"
+        [keys]="['Id','Nombre','Descripcion']"
+        [data]="perfilList"
+        [hasSearch]="true"
+        [hasEdit]="true"
+        (editEmit)="editPerfil($event)"
+        (deleteEmit)="deletePerfil($event)"
+    >
+    </app-custom-table>
+</div>
