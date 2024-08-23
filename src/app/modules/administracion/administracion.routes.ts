@@ -21,6 +21,11 @@ export const routes: Routes = [
                 path:'perfiles',
                 loadChildren: () => import('./pages/perfiles/perfiles.routes').then(m => m.routes),
                 title: nameApp + 'Personas'
+            },
+            {
+                path:'estatus-tickets',
+                loadChildren: () => import('./pages/estatus-ticket/estatus-ticket.routes').then(m => m.routes),
+                title: nameApp + 'Estatus Tickets'
             }
         ]
     },
