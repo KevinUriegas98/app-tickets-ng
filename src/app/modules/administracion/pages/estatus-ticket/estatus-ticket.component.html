@@ -1,1 +1,30 @@
-<p>estatus-ticket works!</p>
+<div class="w-full p-4 bg-light-bg border border-light-border rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-bg dark:border-dark-border">
+    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+        <h5 class="text-xl font-medium text-light-text dark:text-dark-text">Estatus Ticket | Formulario</h5>
+        <div class="grid md:grid-cols-2 md:gap-9">
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Nombre de estatus</label>
+                <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Por resolver"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['required']">Nombre de Estatus Requerido*</p>
+                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios*</p>
+                </div>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Estatus</label>
+                <div class="flex items-center space-x-4">
+                    <input type="radio" class="" name="activo" formControlName="activo" [value]="1">
+                    <label for="text" class="text-sm font-medium text-light-text dark:text-dark-text">Activo</label>
+
+                    <input type="radio" class="" name="activo" formControlName="activo" [value]="0">
+                    <label for="text" class="text-sm font-medium text-light-text dark:text-dark-text">Inactivo</label>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-light-border dark:border-dark-border">
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="btn">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

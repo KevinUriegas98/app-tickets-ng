@@ -16,3 +16,7 @@ export const profiles = {
 export const stores = {
   get: `${environment.urlBase}GetSucursales`
 };
+
+export const estatusTickets = {
+  insert: `${environment.urlBase}InsertEstatus`
+}
