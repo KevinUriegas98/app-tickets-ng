@@ -18,5 +18,6 @@ export const stores = {
 };
 
 export const estatusTickets = {
+  get: `${environment.urlBase}GetAllEstatus`,
   insert: `${environment.urlBase}InsertEstatus`
 }

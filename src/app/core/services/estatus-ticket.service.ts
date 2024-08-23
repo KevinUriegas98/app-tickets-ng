@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { estatusTickets } from '@Global/endpoints';
-import { EstatusTicketInsertRequest } from '../models/estatus-tickets';
+import { EstatusTicketInsertRequest, GetEstatusTicketsResponse } from '../models/estatus-tickets';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,16 @@ export class EstatusTicketService {
   insertEstatusTicket(estatus:EstatusTicketInsertRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
     return this.http.post<boolean>(estatusTickets.insert,estatus,httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
+
+  getAllEstatusTickets(): Observable<GetEstatusTicketsResponse> {
+    const httpOptions = {headers:this.headers}
+    return this.http.get<GetEstatusTicketsResponse>(estatusTickets.get, httpOptions)
     .pipe(
       map(res => {
         return res;
