@@ -20,5 +20,6 @@ export const stores = {
 export const estatusTickets = {
   get: `${environment.urlBase}GetAllEstatus`,
   insert: `${environment.urlBase}InsertEstatus`,
-  update: `${environment.urlBase}UpdateEstatus`
+  update: `${environment.urlBase}UpdateEstatus`,
+  delete: `${environment.urlBase}DeleteEstatus`,
 }

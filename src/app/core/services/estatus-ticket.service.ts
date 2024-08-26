@@ -16,7 +16,7 @@ export class EstatusTicketService {
   }
 
   insertEstatusTicket(estatus:EstatusTicketInsertRequest): Observable<boolean> {
-    const httpOptions = {headers:this.headers}
+    const httpOptions = { headers: this.headers };
     return this.http.post<boolean>(estatusTickets.insert,estatus,httpOptions)
     .pipe(
       map(res => {
@@ -26,7 +26,7 @@ export class EstatusTicketService {
   }
 
   getAllEstatusTickets(): Observable<GetEstatusTicketsResponse> {
-    const httpOptions = {headers:this.headers}
+    const httpOptions = { headers: this.headers };
     return this.http.get<GetEstatusTicketsResponse>(estatusTickets.get, httpOptions)
     .pipe(
       map(res => {
@@ -36,8 +36,19 @@ export class EstatusTicketService {
   }
 
   updateEstatusTicket(estatus:EstatusTicketModel): Observable<boolean> {
-    const httpOptions = {headers:this.headers}
+    const httpOptions = { headers: this.headers };
     return this.http.put<boolean>(estatusTickets.update, estatus,httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
+
+  deleteEstatusTicket(id:number): Observable<boolean> {
+    const httpOptions = { headers: this.headers };
+    const url = `${estatusTickets.delete}?Id=${id}`;
+    return this.http.delete<boolean>(url, httpOptions)
     .pipe(
       map(res => {
         return res;

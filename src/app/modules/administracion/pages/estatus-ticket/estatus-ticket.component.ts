@@ -132,7 +132,34 @@ export class EstatusTicketComponent {
     });
   }
 
-  deleteEstatus(id:number){
-    console.log(id)
+  deleteEstatus(Estatus_Id: number) {
+    Swal.fire({
+      title: "¿Estás seguro que deseas eliminar permanentemente este estatus?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+      customClass: {
+        popup: 'dark:bg-dark-bg',
+        title: 'dark:text-white',
+        validationMessage: 'dark:bg-dark-bg text-white',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(Estatus_Id)
+        this.estatusTicketService.deleteEstatusTicket(Estatus_Id)
+        .subscribe({
+          next: (res) => {
+            this.toastr.success('Estatus eliminado exitosamente');
+            this.getAllEstatus();
+          },
+          error: (err) => {
+            console.log(err);
+            this.toastr.error('Ha Ocurrido un Error', err);
+          }
+        });
+      }
+    });
   }
 }
