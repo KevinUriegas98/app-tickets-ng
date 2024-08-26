@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,7 +11,7 @@ import { images } from '@Constants';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, FontAwesomeModule, FooterComponent],
+  imports: [RouterModule, FontAwesomeModule, FooterComponent, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -19,6 +19,7 @@ export class SidebarComponent {
   readonly images = images;
   private router = inject(Router);
 
+  isSidebarOpen = false;
   userName: string = "";
   savedTheme: any = ""
   private isBrowser: boolean;
@@ -62,5 +63,9 @@ export class SidebarComponent {
 
   get icon(): string {
     return localStorage.getItem('theme') === 'dark' ? 'moon' : 'sun';
+  }
+
+  toggleSidebar():void{
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }
