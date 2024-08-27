@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
-import { estatusTickets } from '@Global/endpoints';
+import { estatusTickets } from '@EndPoints';
 import { EstatusTicketInsertRequest, EstatusTicketModel, GetEstatusTicketsResponse } from '../models/estatus-tickets';
 
 @Injectable({
