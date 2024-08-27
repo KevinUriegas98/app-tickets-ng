@@ -28,13 +28,16 @@
         </div>
     </form>
 </div>
-<div class="relative overflow-x-auto shadow-md w-full p-2 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
     <app-custom-table
+        tableHead="Estatus Ticket | Tabla"
         keyRow="Estatus_Id"
-        [headers]="['#','Nombre','Activo']"
-        [keys]="['Estatus_Id','Estatus_Nombre','Estatus_Activo']"
+        [headers]="['#','Nombre']"
+        [keys]="['Estatus_Id','Estatus_Nombre']"
         [data]="estatusList"
         [hasSearch]="true"
+        [hasStatus]="true"
+        keyStatus="Estatus_Activo"
         [hasEdit]="true"
         [hasDelete]="true"
         (editEmit)="editEstatus($event)"
