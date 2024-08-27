@@ -26,6 +26,11 @@ export const routes: Routes = [
                 path:'estatus-tickets',
                 loadChildren: () => import('./pages/estatus-ticket/estatus-ticket.routes').then(m => m.routes),
                 title: nameApp + 'Estatus Tickets'
+            },
+            {
+                path: 'tickets',
+                loadChildren: () => import('./pages/tickets/tickets.routes').then(m => m.routes),
+                title: nameApp + 'Tickets'
             }
         ]
     },
