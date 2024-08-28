@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 
@@ -7,10 +7,13 @@ import { SweetAlertService } from '@Service/SweetAlert';
 
 import { TicketInsertRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
+import { SistemaService } from '@Services';
+import { SistemaModel } from '@Models/Sistema';
+
 @Component({
   selector: 'app-tickets',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CustomTableComponent],
+  imports: [ReactiveFormsModule, NgIf,NgFor, CustomTableComponent],
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.css'
 })
@@ -18,7 +21,10 @@ export class TicketsComponent {
   constructor() { }
   private fb = inject(FormBuilder);
   private ticketService = inject(TicketService);
+  private sistemaService = inject(SistemaService);
   private sweetAlertService = inject(SweetAlertService);
+
+  sistemasList: SistemaModel[] = [];
 
   form = this.fb.nonNullable.group({
     id: [0],
@@ -27,6 +33,17 @@ export class TicketsComponent {
     modulo: [1, [Validators.required]],
     descripcion: ['', [Validators.required]]
   });
+
+  ngOnInit(): void {
+    this.getSistemas();
+
+  }
+
+  getSistemas() {
+    this.sistemaService.getAllSistemas().subscribe((data) => {
+      this.sistemasList = data.response;
+    });
+  }
 
   onSubmit(): void{
     if (this.form.valid) {
