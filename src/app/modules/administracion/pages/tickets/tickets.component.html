@@ -18,8 +18,11 @@
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Módulo</label>
                 <select formControlName="modulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                    <option [value]="1">Modulo 1</option>
-                    <option [value]="2">Modulo 2</option>
+                    <ng-container *ngFor="let modulo of modulosList">
+                        <option *ngIf="modulo.Sistema_Id == form.get('sistema')?.value" [value]="modulo.Modulo_Id">
+                            {{modulo.Modulo_Nombre}}
+                        </option>
+                    </ng-container>
                 </select>
             </div>
             <div class="relative z-0 w-full mb-5 group">

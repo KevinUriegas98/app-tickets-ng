@@ -7,8 +7,12 @@ import { SweetAlertService } from '@Service/SweetAlert';
 
 import { TicketInsertRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
+
 import { SistemaService } from '@Services';
 import { SistemaModel } from '@Models/Sistema';
+
+import { ModuloService } from '@Services';
+import { ModuloModel } from '@Models/Modulo';
 
 @Component({
   selector: 'app-tickets',
@@ -22,9 +26,11 @@ export class TicketsComponent {
   private fb = inject(FormBuilder);
   private ticketService = inject(TicketService);
   private sistemaService = inject(SistemaService);
+  private moduloService = inject(ModuloService);
   private sweetAlertService = inject(SweetAlertService);
 
   sistemasList: SistemaModel[] = [];
+  modulosList: ModuloModel[] = [];
 
   form = this.fb.nonNullable.group({
     id: [0],
@@ -36,12 +42,19 @@ export class TicketsComponent {
 
   ngOnInit(): void {
     this.getSistemas();
+    this.getModulos();
 
   }
 
   getSistemas() {
     this.sistemaService.getAllSistemas().subscribe((data) => {
       this.sistemasList = data.response;
+    });
+  }
+
+  getModulos() {
+    this.moduloService.getAllModulos().subscribe((data) => {
+      this.modulosList = data.response;
     });
   }
 

@@ -31,3 +31,7 @@ export const tickets = {
 export const sistemas = {
   get: `${environment.urlBase}GetAllSistemas`
 }
+
+export const modulos = {
+  get: `${environment.urlBase}GetAllModulos`
+}

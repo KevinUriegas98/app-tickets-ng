@@ -19,7 +19,8 @@
       "@Models/Person": ["src/app/core/models/persons"],
       "@Models/Perfil": ["src/app/core/models/perfil"],
       "@Models/Ticket": ["src/app/core/models/tickets"],
-      "@Models/Sistema": ["src/app/core/models/sistemas"]
+      "@Models/Sistema": ["src/app/core/models/sistemas"],
+      "@Models/Modulo": ["src/app/core/models/modulos"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
