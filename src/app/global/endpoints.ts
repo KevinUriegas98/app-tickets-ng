@@ -23,3 +23,7 @@ export const estatusTickets = {
   update: `${environment.urlBase}UpdateEstatus`,
   delete: `${environment.urlBase}DeleteEstatus`,
 }
+
+export const tickets = {
+  insert: `${environment.urlBase}InsertTicket`
+}

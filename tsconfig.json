@@ -18,6 +18,7 @@
       "@Models/StatusTickets": ["src/app/core/models/estatus-tickets"],
       "@Models/Person": ["src/app/core/models/persons"],
       "@Models/Perfil": ["src/app/core/models/perfil"],
+      "@Models/Ticket": ["src/app/core/models/tickets"],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

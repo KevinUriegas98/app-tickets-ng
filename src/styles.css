@@ -14,3 +14,6 @@ a {
 .btn {
     @apply w-[200px] mx-auto px-5 py-2.5 me-2 rounded-lg font-semibold bg-light-btn-bg hover:bg-light-btn-hover dark:bg-dark-btn-bg dark:hover:bg-dark-btn-hover text-white
 }
+.file-input{
+    @apply text-gray-400 dark:text-gray-300 file:mr-2 file:px-4 file:py-2 file:rounded-lg file:font-semibold file:border-0 file:bg-sky-300 hover:file:bg-sky-400 file:text-white dark:file:bg-sky-500 dark:hover:file:bg-sky-600
+}
