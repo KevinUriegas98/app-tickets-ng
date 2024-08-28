@@ -23,3 +23,15 @@ export const estatusTickets = {
   update: `${environment.urlBase}UpdateEstatus`,
   delete: `${environment.urlBase}DeleteEstatus`,
 }
+
+export const tickets = {
+  insert: `${environment.urlBase}InsertTicket`
+}
+
+export const sistemas = {
+  get: `${environment.urlBase}GetAllSistemas`
+}
+
+export const modulos = {
+  get: `${environment.urlBase}GetAllModulos`
+}
