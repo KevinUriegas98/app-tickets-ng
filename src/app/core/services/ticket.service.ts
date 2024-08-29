@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { tickets } from '@EndPoints';
-import { TicketInsertRequest } from '../models/tickets';
-
+import { TicketInsertRequest } from '@Models/Ticket';
+ 
 @Injectable({
   providedIn: 'root'
 })

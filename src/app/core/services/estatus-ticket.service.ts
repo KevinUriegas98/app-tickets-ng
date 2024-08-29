@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { estatusTickets } from '@EndPoints';
-import { EstatusTicketInsertRequest, EstatusTicketModel, GetEstatusTicketsResponse } from '../models/estatus-tickets';
+import { EstatusTicketInsertRequest, EstatusTicketModel, GetEstatusTicketsResponse } from '@Models/StatusTickets';
 
 @Injectable({
   providedIn: 'root'

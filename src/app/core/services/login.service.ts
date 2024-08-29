@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { auth } from 'src/app/global/endpoints';
-import { LoginRequest, LoginResponse } from 'src/app/core/models/login'
+import { auth } from '@EndPoints';
+import { LoginRequest, LoginResponse } from '@Models/Auth'
 
 @Injectable({
   providedIn: 'root',
