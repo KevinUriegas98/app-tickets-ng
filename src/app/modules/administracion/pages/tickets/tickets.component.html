@@ -5,25 +5,35 @@
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Tipo Ticket</label>
                 <select formControlName="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <option [value]="0" disabled>Tipos</option>
                     <option [value]="1">Error</option>
                     <option [value]="2">Cambio</option>
                 </select>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('tipo')?.errors?.['min']">Seleccione un tipo*</p>
+                </div>
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Sistema</label>
-                <select formControlName="sistema" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                <select formControlName="sistema" (change)="filterModulos($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <option [value]="0" disabled>Sistemas</option>
                     <option *ngFor="let sistema of sistemasList" [value]="sistema.Sistema_Id">{{sistema.Sistema_Nombre}}</option>
                 </select>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('sistema')?.touched && form.get('sistema')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('sistema')?.errors?.['min']">Seleccione un sistema*</p>
+                </div>
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Módulo</label>
                 <select formControlName="modulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                    <ng-container *ngFor="let modulo of modulosList">
-                        <option *ngIf="modulo.Sistema_Id == form.get('sistema')?.value" [value]="modulo.Modulo_Id">
-                            {{modulo.Modulo_Nombre}}
-                        </option>
-                    </ng-container>
+                    <option [value]="0" disabled>Módulos</option>
+                    <option *ngFor="let modulo of modulosBySistema" [value]="modulo.Modulo_Id">
+                        {{modulo.Modulo_Nombre}} 
+                    </option>
                 </select>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('modulo')?.touched && form.get('modulo')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('modulo')?.errors?.['min']">Seleccione un módulo*</p>
+                </div>
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Descripción</label>
@@ -38,24 +48,6 @@
                 <input type="file" class="block w-full file-input"/>
 
             </div>
-            <!-- <div class="relative z-0 w-full mb-5 group">
-                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Nombre de estatus</label>
-                <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Por resolver"/>
-                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
-                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['required']">Nombre de Estatus Requerido*</p>
-                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios*</p>
-                </div>
-            </div>
-            <div class="relative z-0 w-full mb-5 group">
-                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Estatus</label>
-                <div class="flex items-center space-x-4">
-                    <input type="radio" class="" name="activo" formControlName="activo" [value]="1">
-                    <label for="text" class="text-sm font-medium text-light-text dark:text-dark-text">Activo</label>
-
-                    <input type="radio" class="" name="activo" formControlName="activo" [value]="0">
-                    <label for="text" class="text-sm font-medium text-light-text dark:text-dark-text">Inactivo</label>
-                </div>
-            </div> -->
         </div> 
         <div class="border-t border-light-border dark:border-dark-border">
             <div class="flex justify-end mt-4">

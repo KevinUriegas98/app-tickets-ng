@@ -30,14 +30,15 @@ export class TicketsComponent {
   private sweetAlertService = inject(SweetAlertService);
 
   sistemasList: SistemaModel[] = [];
+  modulosBySistema: ModuloModel[] = [];
   modulosList: ModuloModel[] = [];
 
   form = this.fb.nonNullable.group({
     id: [0],
-    tipo: [1, [Validators.required]],
-    sistema: [1, [Validators.required, Validators.maxLength(255)]],
-    modulo: [1, [Validators.required]],
-    descripcion: ['', [Validators.required]]
+    tipo: [0,[Validators.required, Validators.min(1)]],
+    sistema: [0, [Validators.required, Validators.min(1)]],
+    modulo: [0, [Validators.required, Validators.min(1)]],
+    descripcion: ['', [Validators.required, Validators.maxLength(255)]]
   });
 
   ngOnInit(): void {
@@ -58,19 +59,51 @@ export class TicketsComponent {
     });
   }
 
+  filterModulos(event: Event) {
+    const Sistema_Id = +(event.target as HTMLSelectElement).value;
+
+    this.modulosBySistema = this.modulosList.filter(modulo => modulo.Sistema_Id == Sistema_Id);
+    if (this.modulosList.length > 0) {
+      this.form.controls['modulo'].setValue(this.modulosList[0].Modulo_Id);
+    } else {
+      this.form.controls['modulo'].setValue(0);
+    }
+  }
+  
   onSubmit(): void{
     if (this.form.valid) {
       const { id, tipo, sistema, modulo, descripcion } = this.form.getRawValue();
-
+      
       const request: TicketInsertRequest = {
         Usuario_Registra: 1,
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
-        Ticket_Descripcion: descripcion,
+        Ticket_Descripcion: descripcion.trim(),
         Ticket_Estatus: 1
       }
 
-      console.log(request)
+      this.resetForm();
+      const serviceCall = this.ticketService.insertTicket(request)
+      serviceCall.subscribe({
+          next: (res: any) => {
+            this.resetForm();
+          },
+          error: (err: any) => {
+            console.log(err);
+          }
+        });
+    } else {
+      this.form.markAllAsTouched();
     }
+  }
+
+  resetForm() {
+    this.form.reset({
+      id: 0,
+      tipo: 0,
+      sistema: 0,
+      modulo: 0,
+      descripcion: '',
+    });
   }
 }
