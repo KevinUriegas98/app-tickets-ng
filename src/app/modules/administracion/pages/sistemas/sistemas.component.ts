@@ -5,7 +5,7 @@ import { Component, inject, Injectable } from "@angular/core";
 import { CustomTableComponent } from "@Component/Table";
 import { SweetAlertService } from "@Service/SweetAlert";
 
-import { SistemaInsertRequest } from "@Models/Sistema";
+import { SistemaInsertRequest, SistemaModel } from "@Models/Sistema";
 import { SistemaService } from "@Services";
 
 @Component({
@@ -20,11 +20,23 @@ export class SistemasComponent {
   private sistemaService = inject(SistemaService);
   private sweetAlertService = inject(SweetAlertService);
 
+  sistemasList: SistemaModel[] = []
+
   form = this.fb.nonNullable.group({
     id: [0],
     nombre: ['', Validators.required],
     tipo: [0, [Validators.required, Validators.min(1)]]
   })
+
+  ngOnInit(): void{
+    this.getAllSistemas();
+  }
+
+  getAllSistemas() {
+    this.sistemaService.getAllSistemas().subscribe((data) => {
+      this.sistemasList = data.response;
+    })
+  }
 
   onSubmit(): void{
     if (this.form.valid) {
@@ -40,6 +52,7 @@ export class SistemasComponent {
       serviceCall.subscribe({
         next: (res: any) => {
           this.resetForm();
+          this.getAllSistemas();
         },
         error: (err: any) => {
           console.log(err);
@@ -49,7 +62,6 @@ export class SistemasComponent {
       this.form.markAllAsTouched();
     }
   }
-
   resetForm() {
     this.form.reset({
       id: 0,
@@ -57,5 +69,15 @@ export class SistemasComponent {
       tipo: 0,
     });
   }
+
+  editSistema(data: SistemaModel) {
+    console.log(data);
+  }
+
+  deleteSistema(Sistema_Id: number) {
+    console.log(Sistema_Id);
+  }
+
+
   
 }

@@ -27,3 +27,20 @@
         </div>
     </form>
 </div>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Sistemas | Tabla"
+        keyRow="Sistema_Id"
+        [headers]="['#','Nombre', 'Tipo', 'Fecha_Registro', 'Usuario' ]"
+        [keys]="['Sistema_Id','Sistema_Nombre', 'Sistema_Tipo', 'Fecha_Registro', 'Usuario_Registra']"
+        [data]="sistemasList"
+        [hasSearch]="true"
+        [hasStatus]="true"
+        keyStatus="Sistema_Estatus"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editSistema($event)"
+        (deleteEmit)="deleteSistema($event)"
+    >
+    </app-custom-table>
+</div>
