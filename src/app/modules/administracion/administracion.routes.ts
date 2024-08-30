@@ -26,6 +26,11 @@ export const routes: Routes = [
                 path: 'sistemas',
                 loadChildren: () => import('./pages/sistemas/sistemas.routes').then(m => m.routes),
                 title: nameApp + 'Sistemas'
+            },
+            {
+                path: 'modulos',
+                loadChildren: () => import('./pages/modulos/modulos.routes').then(m => m.routes),
+                title: nameApp + 'Módulos'
             }
         ]
     },

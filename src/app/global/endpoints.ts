@@ -23,5 +23,8 @@ export const sistemas = {
 }
 
 export const modulos = {
-  get: `${environment.urlBase}GetAllModulos`
+  get: `${environment.urlBase}GetAllModulos`,
+  insert: `${environment.urlBase}InsertModulo`,
+  update: `${environment.urlBase}UpdateModulo`,
+  delete: `${environment.urlBase}DeleteModulo`
 }
