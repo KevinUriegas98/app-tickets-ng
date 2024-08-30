@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { modulos } from '@EndPoints';
-import { GetModulosResponse, ModuloInsertRequest } from '@Models/Modulo';
+import { GetModulosResponse, ModuloInsertRequest, ModuloUpdateRequest } from '@Models/Modulo';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +31,16 @@ export class ModuloService {
       map(res => {
         return res;
       })
-    )  }
+    )
+  }
+
+  updateModulo(modulo: ModuloUpdateRequest): Observable<Boolean>{
+    const httpOptions = { headers: this.headers };
+    return this.http.put<Boolean>(modulos.update, modulo, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+    })
+  )
+  }
 }

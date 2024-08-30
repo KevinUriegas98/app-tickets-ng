@@ -7,7 +7,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 
-import { ModuloInsertRequest, ModuloModel } from '@Models/Modulo';
+import { ModuloInsertRequest, ModuloModel, ModuloUpdateRequest } from '@Models/Modulo';
 import { ModuloService, SistemaService } from '@Services';
 import { SistemaModel } from '@Models/Sistema';
 
@@ -62,7 +62,15 @@ export class ModulosComponent {
         Usuario_Registra: 1
       }
 
-      const serviceCall = this.moduloService.insertModulo(request)
+      const requestUpdate: ModuloUpdateRequest = {
+        Modulo_Id: id,
+        Modulo_Nombre: nombre.trim(),
+        Sistema_Id: sistema,
+        Modulo_Estatus: 1,
+        Usuario_Registra: 1
+      }
+
+      const serviceCall = id == 0 ? this.moduloService.insertModulo(request) : this.moduloService.updateModulo(requestUpdate);
       serviceCall.subscribe({
         next: (res: any) => {
           this.resetForm();
@@ -84,7 +92,11 @@ export class ModulosComponent {
   }
 
   editModulo(data: ModuloModel) {
-    console.log(data);
+    this.form.patchValue({
+      id: data.Modulo_Id,
+      nombre: data.Modulo_Nombre,
+      sistema: data.Sistema_Id
+    })
   }
 
   deleteModulo(Modulo_Id: number) {

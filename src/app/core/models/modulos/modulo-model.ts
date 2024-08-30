@@ -7,6 +7,14 @@ export interface ModuloInsertRequest {
     Usuario_Registra: number;
 }
 
+export interface ModuloUpdateRequest {
+    Modulo_Id: number;
+    Sistema_Id: number;
+    Modulo_Nombre: string;
+    Modulo_Estatus: number;
+    Usuario_Registra: number;
+}
+
 export type GetModulosResponse = ApiResponse<ModuloModel[]>;
 
 export interface ModuloModel {
