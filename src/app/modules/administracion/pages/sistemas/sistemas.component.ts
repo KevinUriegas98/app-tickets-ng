@@ -84,13 +84,25 @@ export class SistemasComponent {
       id: data.Sistema_Id,
       nombre: data.Sistema_Nombre,
       tipo: data.Sistema_Tipo
-    })
+    });
   }
 
   deleteSistema(Sistema_Id: number) {
-    console.log(Sistema_Id);
+    this.sweetAlertService.confirm({
+      title: '¿Estas seguro que deseas eliminar permanentemente este sistema?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.sistemaService.deleteSistema(Sistema_Id)
+          .subscribe({
+            next: (res) => {
+              this.getAllSistemas();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
+    });   
   }
-
-
-  
 }

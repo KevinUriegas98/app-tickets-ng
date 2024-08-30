@@ -18,7 +18,8 @@ export const tickets = {
 export const sistemas = {
   insert: `${environment.urlBase}InsertSistema`,
   get: `${environment.urlBase}GetAllSistemas`,
-  update: `${environment.urlBase}UpdateSistema`
+  update: `${environment.urlBase}UpdateSistema`,
+  delete: `${environment.urlBase}DeleteSistema`
 }
 
 export const modulos = {

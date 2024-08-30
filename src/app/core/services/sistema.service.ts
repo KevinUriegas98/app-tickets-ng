@@ -43,4 +43,15 @@ export class SistemaService {
       })
     )
   }
+
+  deleteSistema(id: number): Observable<Boolean> {
+    const httpOptions = { headers: this.headers };
+    const url = `${sistemas.delete}?Id=${id}`
+    return this.http.delete<boolean>(url, httpOptions)
+      .pipe(
+        map(res => {
+        return res;
+      })
+    )
+  }
 }
