@@ -16,6 +16,7 @@ export const tickets = {
 }
 
 export const sistemas = {
+  insert: `${environment.urlBase}InsertSistema`,
   get: `${environment.urlBase}GetAllSistemas`
 }
 

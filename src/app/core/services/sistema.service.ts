@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { sistemas } from '@EndPoints';
-import { SistemaModel, GetSistemasResponse } from '@Models/Sistema';
+import { SistemaInsertRequest,SistemaModel, GetSistemasResponse } from '@Models/Sistema';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,15 @@ export class SistemaService {
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders ({})
   }
+
+  insertSistema(sistema: SistemaInsertRequest): Observable<Boolean> {
+    const httpOptions = { headers: this.headers };
+    return this.http.post<Boolean>(sistemas.insert, sistema, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )  }
 
   getAllSistemas(): Observable<GetSistemasResponse> {
     const httpOptions = { headers: this.headers };
