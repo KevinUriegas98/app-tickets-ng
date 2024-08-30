@@ -1,1 +1,17 @@
-<p>modulos works!</p>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Módulos | Tabla"
+        keyRow="Modulo_Id"
+        [headers]="['#','Sistema','Nombre','Fecha Registro', 'Usuario Registra']"
+        [keys]="['Modulo_Id','Sistema_Id','Modulo_Nombre', 'Fecha_Registro', 'Usuario_Registra']"
+        [data]="modulosList"
+        [hasSearch]="true"
+        [hasStatus]="true"
+        keyStatus="Sistema_Estatus"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editModulo($event)"
+        (deleteEmit)="deleteModulo($event)"
+    >
+    </app-custom-table>
+</div>
