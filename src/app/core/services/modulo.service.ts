@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { modulos } from '@EndPoints';
-import { GetModulosResponse } from '@Models/Modulo';
+import { GetModulosResponse, ModuloInsertRequest } from '@Models/Modulo';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +12,16 @@ export class ModuloService {
   private headers: HttpHeaders;
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders ({})
+  }
+
+  insertModulo(modulo: ModuloInsertRequest): Observable<Boolean>{
+    const httpOptions = { headers: this.headers };
+    return this.http.post<Boolean>(modulos.insert, modulo, httpOptions)
+      .pipe(
+        map(res => {
+          return res;
+      })
+    )
   }
 
   getAllModulos(): Observable<GetModulosResponse>{
