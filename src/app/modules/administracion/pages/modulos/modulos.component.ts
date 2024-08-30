@@ -100,6 +100,21 @@ export class ModulosComponent {
   }
 
   deleteModulo(Modulo_Id: number) {
-    console.log(Modulo_Id)
+    this.sweetAlertService.confirm({
+      title: '¿Estás seguro que deseas eliminar permanentemente este módulo?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.moduloService.deleteModulo(Modulo_Id)
+          .subscribe({
+            next: (res) => {
+              this.getAllModulos();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
+    });
   }
 }

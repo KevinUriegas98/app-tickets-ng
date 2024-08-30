@@ -43,4 +43,15 @@ export class ModuloService {
     })
   )
   }
+
+  deleteModulo(id: number): Observable<Boolean>{
+    const httpOptions = { headers: this.headers };
+    const url = `${modulos.delete}?Id=${id}`
+    return this.http.delete<Boolean>(url, httpOptions)
+      .pipe(
+        map(res => {
+        return res;
+      })
+    )
+  }
 }
