@@ -5,7 +5,7 @@ import { Component, inject, Injectable } from "@angular/core";
 import { CustomTableComponent } from "@Component/Table";
 import { SweetAlertService } from "@Service/SweetAlert";
 
-import { SistemaInsertRequest, SistemaModel } from "@Models/Sistema";
+import { SistemaInsertRequest, SistemaUpdateRequest, SistemaModel } from "@Models/Sistema";
 import { SistemaService } from "@Services";
 
 @Component({
@@ -48,7 +48,16 @@ export class SistemasComponent {
         Sistema_Estatus: 1,
         Usuario_Registra: 1,
       }
-      const serviceCall = this.sistemaService.insertSistema(request);
+
+      const requestUpdate: SistemaUpdateRequest = {
+        Sistema_Id: id,
+        Sistema_Nombre: nombre.trim(),
+        Sistema_Tipo: tipo,
+        Sistema_Estatus: 1,
+        Usuario_Registra: 1
+      }
+
+      const serviceCall = id === 0 ?this.sistemaService.insertSistema(request):this.sistemaService.updateSistema(requestUpdate)
       serviceCall.subscribe({
         next: (res: any) => {
           this.resetForm();
@@ -71,7 +80,11 @@ export class SistemasComponent {
   }
 
   editSistema(data: SistemaModel) {
-    console.log(data);
+    this.form.patchValue({
+      id: data.Sistema_Id,
+      nombre: data.Sistema_Nombre,
+      tipo: data.Sistema_Tipo
+    })
   }
 
   deleteSistema(Sistema_Id: number) {

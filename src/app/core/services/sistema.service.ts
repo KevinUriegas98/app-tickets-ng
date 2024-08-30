@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 import { sistemas } from '@EndPoints';
-import { SistemaInsertRequest,SistemaModel, GetSistemasResponse } from '@Models/Sistema';
+import { SistemaInsertRequest, SistemaUpdateRequest, SistemaModel, GetSistemasResponse } from '@Models/Sistema';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,16 @@ export class SistemaService {
     .pipe(
       map(res => {
         return res;
+      })
+    )
+  }
+
+  updateSistema(sistema: SistemaUpdateRequest): Observable<Boolean> {
+    const httpOptions = { headers: this.headers };
+    return this.http.put<Boolean>(sistemas.update, sistema, httpOptions)
+      .pipe(
+        map(res => {
+          return res;
       })
     )
   }
