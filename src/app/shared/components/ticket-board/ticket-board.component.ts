@@ -6,23 +6,43 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPen, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-ticket-board',
   standalone: true,
-  imports: [NgIf, CdkDropList, CdkDrag],
+  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, FontAwesomeModule],
   templateUrl: './ticket-board.component.html',
   styleUrl: './ticket-board.component.css'
 })
 export class TicketBoardComponent {
   isModalOpen = false;
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      faXmark,
+      faTrashCan
+    );
+  }
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  statuses = [
+    { name: 'Creado', tickets: [
+      {name:'Falla en Sistema ERP', tipoTicket:'Error', fecha:'29-Agosto-2024', estatus:'Creado', usuarioCreate: 'Gustavo Platas', sistema:'Supertiendas Rico', modulo:'Pagos', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
+      {name:'No guarda los pagos con tarjeta', tipoTicket:'Error', fecha:'22-Agosto-2024', estatus:'Creado', usuarioCreate: 'Sergio', sistema:'TopWings', modulo:'Punto de Venta', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
+      {name:'Agregar nuevo método de pago', tipoTicket:'Cambio', fecha:'23-Agosto-2024', estatus:'Creado', usuarioCreate: 'Sergio', sistema:'TopWings', modulo:'Punto de Venta', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
+    ]},
+    { name: 'Asignado', tickets: [] },
+    { name: 'En Tratamiento', tickets: [] },
+    { name: 'Finalizado', tickets: [] }
+  ];
 
-  drop(event: CdkDragDrop<string[]>) {
+  getConnectedDropListIds(index: number): string[] {
+    return this.statuses.map((_, idx) => `cdk-drop-list-${idx}`);
+  }
+
+  drop(event: CdkDragDrop<any[]>, statusIndex: number) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -30,12 +50,13 @@ export class TicketBoardComponent {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }
 
-  openModal() {
+  openModal(data:any) {
+    console.log(data)
     this.isModalOpen = true;
   }
 
