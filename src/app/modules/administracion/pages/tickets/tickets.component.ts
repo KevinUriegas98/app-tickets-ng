@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core';
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 
-import { TicketInsertRequest } from '@Models/Ticket';
+import { TicketEstatusModel, TicketInsertRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
 
 import { SistemaService } from '@Services';
@@ -33,6 +33,9 @@ export class TicketsComponent {
   modulosBySistema: ModuloModel[] = [];
   modulosList: ModuloModel[] = [];
 
+  ticketsList:TicketEstatusModel[] = [];
+
+
   form = this.fb.nonNullable.group({
     id: [0],
     tipo: [0,[Validators.required, Validators.min(1)]],
@@ -44,7 +47,14 @@ export class TicketsComponent {
   ngOnInit(): void {
     this.getSistemas();
     this.getModulos();
+    this.getTickets();
+  }
 
+  getTickets()
+  {
+    this.ticketService.getTicketsEstatus().subscribe((data) => {
+      this.ticketsList = data.response;
+    });
   }
 
   getSistemas() {
@@ -95,6 +105,16 @@ export class TicketsComponent {
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  editTicket(data: TicketEstatusModel)
+  {
+    console.log(data);
+  }
+
+  deleteTicket(Ticket_Id: number)
+  {
+    console.log(Ticket_Id);
   }
 
   resetForm() {
