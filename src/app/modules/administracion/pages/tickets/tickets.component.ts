@@ -106,6 +106,7 @@ export class TicketsComponent {
       serviceCall.subscribe({
           next: (res: any) => {
             this.resetForm();
+            this.getTickets();
           },
           error: (err: any) => {
             console.log(err);
@@ -134,8 +135,22 @@ export class TicketsComponent {
 
   deleteTicket(Ticket_Id: number)
   {
-    console.log(Ticket_Id);
-  }
+    this.sweetAlertService.confirm({
+      title: '¿Estas seguro que deseas eliminar permanentemente este ticket?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ticketService.deleteTicket(Ticket_Id)
+          .subscribe({
+            next: (res) => {
+              this.getTickets();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
+    });     }
 
   resetForm() {
     this.form.reset({

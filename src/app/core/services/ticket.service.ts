@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 
 import { tickets } from '@EndPoints';
 import { TicketEstatusResponse, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
+import { tick } from '@angular/core/testing';
  
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,16 @@ export class TicketService {
         return res; 
       } )
     )
+  }
+
+  deleteTicket(id: number): Observable<Boolean> {
+    const httpOptions = { headers: this.headers };
+    const url = `${tickets.delete}?Id=${id}`
+    return this.http.delete<Boolean>(url, httpOptions)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      )
   }
 }
