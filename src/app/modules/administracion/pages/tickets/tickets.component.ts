@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core';
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 
-import { TicketEstatusModel, TicketInsertRequest } from '@Models/Ticket';
+import { TicketEstatusModel, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
 
 import { SistemaService } from '@Services';
@@ -83,7 +83,7 @@ export class TicketsComponent {
   onSubmit(): void{
     if (this.form.valid) {
       const { id, tipo, sistema, modulo, descripcion } = this.form.getRawValue();
-      
+      const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: TicketInsertRequest = {
         Usuario_Registra: 1,
         Ticket_Tipo: tipo,
@@ -92,8 +92,17 @@ export class TicketsComponent {
         Ticket_Estatus: 1
       }
 
+      const requestUpdate: TicketUpdateRequest = {
+        Ticket_Id: id,
+        Ticket_Tipo: tipo,
+        Modulo_Id: modulo,
+        Ticket_Descripcion: descripcion.trim(),
+        Ticket_Estatus: 1,
+        Usuario_Registra: usuarioRegistra
+      }
+
       this.resetForm();
-      const serviceCall = this.ticketService.insertTicket(request)
+      const serviceCall = id === 0 ?this.ticketService.insertTicket(request):this.ticketService.updateTicket(requestUpdate);
       serviceCall.subscribe({
           next: (res: any) => {
             this.resetForm();
@@ -109,7 +118,18 @@ export class TicketsComponent {
 
   editTicket(data: TicketEstatusModel)
   {
-    console.log(data);
+    const sistema = this.sistemasList.find(sistema => sistema.Sistema_Nombre === data.Sistema_Nombre);
+    const sistemaId = sistema ? sistema.Sistema_Id : 0;
+
+    const modulo = this.modulosBySistema.find(modulo => modulo.Modulo_Nombre === data.Modulo_Nombre);
+    const moduloId = modulo ? modulo.Modulo_Id : 0;
+
+    this.form.patchValue({
+      id: data.Ticket_Id,
+      sistema: sistemaId,
+      modulo: moduloId,
+      descripcion: data.Ticket_Descripcion
+    })
   }
 
   deleteTicket(Ticket_Id: number)

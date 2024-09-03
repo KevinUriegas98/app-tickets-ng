@@ -8,6 +8,15 @@ export interface TicketInsertRequest {
     Ticket_Estatus: number;
 };
 
+export interface TicketUpdateRequest{
+    Ticket_Id: number;
+    Usuario_Registra: number;
+    Ticket_Tipo: number;
+    Modulo_Id: number;
+    Ticket_Descripcion: string;
+    Ticket_Estatus: number;
+}
+
 export type TicketEstatusResponse = ApiResponse<TicketEstatusModel[]>;
 
 export interface TicketEstatusModel

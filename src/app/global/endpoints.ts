@@ -13,7 +13,8 @@ export const estatusTickets = {
 
 export const tickets = {
   insert: `${environment.urlBase}InsertTicket`,
-  get: `${environment.urlBase}GetTicketEstatus`
+  get: `${environment.urlBase}GetTicketEstatus`,
+  update:`${environment.urlBase}UpdateTicket`
 }
 
 export const sistemas = {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { tickets } from '@EndPoints';
-import { TicketEstatusResponse, TicketInsertRequest } from '@Models/Ticket';
+import { TicketEstatusResponse, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
  
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,17 @@ export class TicketService {
       map(res => {
         return res;
       })
+    )
+  }
+
+  updateTicket(ticket: TicketUpdateRequest): Observable<Boolean>
+  {
+    const httpOptions = { headers: this.headers };
+    return this.http.put<Boolean>(tickets.update, ticket, httpOptions)
+    .pipe(
+      map(res => {
+        return res; 
+      } )
     )
   }
 }
