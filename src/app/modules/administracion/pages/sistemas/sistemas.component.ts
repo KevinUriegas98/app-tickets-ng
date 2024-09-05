@@ -41,12 +41,12 @@ export class SistemasComponent {
   onSubmit(): void{
     if (this.form.valid) {
       const { id, nombre, tipo } = this.form.getRawValue();
-
+      const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: SistemaInsertRequest = {
         Sistema_Nombre: nombre.trim(),
         Sistema_Tipo: tipo,
         Sistema_Estatus: 1,
-        Usuario_Registra: 1,
+        Usuario_Registra: usuarioRegistra
       }
 
       const requestUpdate: SistemaUpdateRequest = {
@@ -54,7 +54,7 @@ export class SistemasComponent {
         Sistema_Nombre: nombre.trim(),
         Sistema_Tipo: tipo,
         Sistema_Estatus: 1,
-        Usuario_Registra: 1
+        Usuario_Registra: usuarioRegistra
       }
 
       const serviceCall = id === 0 ?this.sistemaService.insertSistema(request):this.sistemaService.updateSistema(requestUpdate)

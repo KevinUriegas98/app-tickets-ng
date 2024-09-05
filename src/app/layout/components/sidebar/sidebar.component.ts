@@ -37,7 +37,7 @@ export class SidebarComponent {
     );
     this.isBrowser = isPlatformBrowser(platformId);
     this.initializeTheme();
-    this.userName = (localStorage.getItem('theme'))?'Kevin Uriegas':'Otro';
+    this.userName = (localStorage.getItem('nombrePersona'))??'Otro';
   }
 
   toggleDarkMode(): void {

@@ -25,5 +25,5 @@ export interface Usuario {
     IdSucursal: number;
     NombreSucursal: string;
     IdPerfil: number;
-    PctDescuento: number;
+    // PctDescuento: number;
 }

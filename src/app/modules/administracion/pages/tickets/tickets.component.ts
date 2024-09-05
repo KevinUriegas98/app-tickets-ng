@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core';
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 
-import { TicketInsertRequest } from '@Models/Ticket';
+import { TicketEstatusModel, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
 
 import { SistemaService } from '@Services';
@@ -33,6 +33,9 @@ export class TicketsComponent {
   modulosBySistema: ModuloModel[] = [];
   modulosList: ModuloModel[] = [];
 
+  ticketsList:TicketEstatusModel[] = [];
+
+
   form = this.fb.nonNullable.group({
     id: [0],
     tipo: [0,[Validators.required, Validators.min(1)]],
@@ -44,7 +47,14 @@ export class TicketsComponent {
   ngOnInit(): void {
     this.getSistemas();
     this.getModulos();
+    this.getTickets();
+  }
 
+  getTickets()
+  {
+    this.ticketService.getTicketsEstatus().subscribe((data) => {
+      this.ticketsList = data.response;
+    });
   }
 
   getSistemas() {
@@ -73,7 +83,7 @@ export class TicketsComponent {
   onSubmit(): void{
     if (this.form.valid) {
       const { id, tipo, sistema, modulo, descripcion } = this.form.getRawValue();
-      
+      const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: TicketInsertRequest = {
         Usuario_Registra: 1,
         Ticket_Tipo: tipo,
@@ -82,11 +92,21 @@ export class TicketsComponent {
         Ticket_Estatus: 1
       }
 
+      const requestUpdate: TicketUpdateRequest = {
+        Ticket_Id: id,
+        Ticket_Tipo: tipo,
+        Modulo_Id: modulo,
+        Ticket_Descripcion: descripcion.trim(),
+        Ticket_Estatus: 1,
+        Usuario_Registra: usuarioRegistra
+      }
+
       this.resetForm();
-      const serviceCall = this.ticketService.insertTicket(request)
+      const serviceCall = id === 0 ?this.ticketService.insertTicket(request):this.ticketService.updateTicket(requestUpdate);
       serviceCall.subscribe({
           next: (res: any) => {
             this.resetForm();
+            this.getTickets();
           },
           error: (err: any) => {
             console.log(err);
@@ -96,6 +116,41 @@ export class TicketsComponent {
       this.form.markAllAsTouched();
     }
   }
+
+  editTicket(data: TicketEstatusModel)
+  {
+    const sistema = this.sistemasList.find(sistema => sistema.Sistema_Nombre === data.Sistema_Nombre);
+    const sistemaId = sistema ? sistema.Sistema_Id : 0;
+
+    const modulo = this.modulosBySistema.find(modulo => modulo.Modulo_Nombre === data.Modulo_Nombre);
+    const moduloId = modulo ? modulo.Modulo_Id : 0;
+
+    this.form.patchValue({
+      id: data.Ticket_Id,
+      sistema: sistemaId,
+      modulo: moduloId,
+      descripcion: data.Ticket_Descripcion
+    })
+  }
+
+  deleteTicket(Ticket_Id: number)
+  {
+    this.sweetAlertService.confirm({
+      title: '¿Estas seguro que deseas eliminar permanentemente este ticket?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ticketService.deleteTicket(Ticket_Id)
+          .subscribe({
+            next: (res) => {
+              this.getTickets();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
+    });     }
 
   resetForm() {
     this.form.reset({

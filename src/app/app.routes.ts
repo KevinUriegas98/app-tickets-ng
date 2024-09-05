@@ -14,13 +14,13 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LayoutComponent,
-    // canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     loadChildren: () => import('./modules/home/home.routes').then(m => m.routes),
     title: nameApp + 'Página Principal'
   },
   {
     path: 'administracion',
-    // canActivate: [authGuardFn],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/administracion/administracion.routes').then(m => m.routes),
     title: nameApp + 'Administración'
   },

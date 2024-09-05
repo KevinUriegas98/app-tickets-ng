@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { tickets } from '@EndPoints';
-import { TicketInsertRequest } from '@Models/Ticket';
+import { TicketEstatusResponse, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
+import { tick } from '@angular/core/testing';
  
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,38 @@ export class TicketService {
         })
     )
       
+  }
+
+  getTicketsEstatus(): Observable<TicketEstatusResponse>
+  {
+    const httpOptions = { headers: this.headers };
+    return this.http.get<TicketEstatusResponse>(tickets.get, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
+
+  updateTicket(ticket: TicketUpdateRequest): Observable<Boolean>
+  {
+    const httpOptions = { headers: this.headers };
+    return this.http.put<Boolean>(tickets.update, ticket, httpOptions)
+    .pipe(
+      map(res => {
+        return res; 
+      } )
+    )
+  }
+
+  deleteTicket(id: number): Observable<Boolean> {
+    const httpOptions = { headers: this.headers };
+    const url = `${tickets.delete}?Id=${id}`
+    return this.http.delete<Boolean>(url, httpOptions)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      )
   }
 }

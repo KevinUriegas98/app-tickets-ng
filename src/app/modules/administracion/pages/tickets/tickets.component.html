@@ -56,3 +56,19 @@
         </div>
     </form>
 </div>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Tickets | Tabla"
+        keyRow="Ticket_Id"
+        [headers]="['#Ticket', 'Descripción', 'Fecha', 'Módulo', 'Sistema', 'Estatus', 'Usuario Asigando', 'Usuario Registra' ]"
+        [keys]="['Ticket_Id','Ticket_Descripcion', 'Ticket_Fecha', 'Modulo_Nombre', 'Sistema_Nombre', 'Estatus_Nombre', 'Usuario_Asignado', 'Usuario_Registra']"
+        [data]="ticketsList"
+        [hasSearch]="true"
+        [hasStatus]="false"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editTicket($event)"
+        (deleteEmit)="deleteTicket($event)"
+    >
+    </app-custom-table>
+</div>
