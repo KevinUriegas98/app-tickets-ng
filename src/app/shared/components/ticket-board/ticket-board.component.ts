@@ -8,7 +8,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightArrowLeft, faBug, faCircleCheck, faFileExcel, faFileImage, faFilePdf, faFileWord, faPlus, faScrewdriverWrench, faTrashCan, faUser, faUserTag, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { TicketEstatusModel } from '@Models/Ticket';
 
 @Component({
   selector: 'app-ticket-board',
@@ -19,23 +20,38 @@ import { faPen, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class TicketBoardComponent {
   isModalOpen = false;
+  ticket!: TicketEstatusModel;
 
   constructor(library: FaIconLibrary) {
     library.addIcons(
       faXmark,
-      faTrashCan
+      faTrashCan,
+      faBug,
+      faArrowRightArrowLeft,
+      faPlus,
+      faUser,
+      faScrewdriverWrench,
+      faCircleCheck,
+      faFileExcel,
+      faFileWord,
+      faFilePdf,
+      faFileImage
     );
   }
 
   statuses = [
-    { name: 'Creado', tickets: [
-      {name:'Falla en Sistema ERP', tipoTicket:'Error', fecha:'29-Agosto-2024', estatus:'Creado', usuarioCreate: 'Gustavo Platas', sistema:'Supertiendas Rico', modulo:'Pagos', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
-      {name:'No guarda los pagos con tarjeta', tipoTicket:'Error', fecha:'22-Agosto-2024', estatus:'Creado', usuarioCreate: 'Sergio', sistema:'TopWings', modulo:'Punto de Venta', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
-      {name:'Agregar nuevo método de pago', tipoTicket:'Cambio', fecha:'23-Agosto-2024', estatus:'Creado', usuarioCreate: 'Sergio', sistema:'TopWings', modulo:'Punto de Venta', usuarioAsignado:null, fechaResolucion:null, comentarios:null}, 
+    { id: 1, name: 'Creado', tickets: [
+      {Ticket_Id: 1, Ticket_Descripcion: 'Falla en Sistema ERP', Tipo_Ticket_Id: 1, Tipo_Ticket_Nombre: 'Error', Ticket_Fecha: '29-Agosto-2024', Estatus_Id: 1, Estatus_Nombre: 'Creado', Usuario_Registra: 'Gustavo Platas', Usuario_Asignado: '', Comentarios: '', Adjuntos:[{FileName:'captura_de_Pantalla.jpg', Format:'jpg'}]}, 
     ]},
-    { name: 'Asignado', tickets: [] },
-    { name: 'En Tratamiento', tickets: [] },
-    { name: 'Finalizado', tickets: [] }
+    { id: 2, name: 'Asignado', tickets: [
+      {Ticket_Id: 3, Ticket_Descripcion: 'Agregar nuevo método de pago', Tipo_Ticket_Id: 2, Tipo_Ticket_Nombre: 'Cambio', Ticket_Fecha: '23-Agosto-2024', Estatus_Id: 2, Estatus_Nombre: 'Asignado', Usuario_Registra: 'Sergio', Usuario_Asignado: 'Kevin Uriegas', Comentarios: '', Adjuntos:[{FileName:'DocumentoWord.docx', Format:'docx'}]}, 
+    ]},
+    { id: 3, name: 'En Tratamiento', tickets: [
+      {Ticket_Id: 2, Ticket_Descripcion: 'No guarda los pagos con tarjeta', Tipo_Ticket_Id: 1, Tipo_Ticket_Nombre: 'Error', Ticket_Fecha: '22-Agosto-2024', Estatus_Id: 3, Estatus_Nombre: 'En Tratamiento', Usuario_Registra: 'Sergio', Usuario_Asignado: 'Sebastian Villarreal', Comentarios: '', Adjuntos:[{FileName:'DocumentoExcel.docx', Format:'xlsx'}]}, 
+    ]},
+    { id: 4, name: 'Finalizado', tickets: [
+      {Ticket_Id: 5, Ticket_Descripcion: 'No se genera el reporte de pagos', Tipo_Ticket_Id: 1, Tipo_Ticket_Nombre: 'Error', Ticket_Fecha: '25-Agosto-2024', Estatus_Id: 4, Estatus_Nombre: 'Finalizado', Usuario_Registra: 'Isaias', Usuario_Asignado: 'Gustavo Platas', Comentarios: 'Se corrigió el error al momento de generar el reporte, por favor intente de nuevo', Adjuntos:[{FileName:'DocumentoPdf.pdf', Format:'pdf'}]},
+    ]}
   ];
 
   getConnectedDropListIds(index: number): string[] {
@@ -56,7 +72,7 @@ export class TicketBoardComponent {
   }
 
   openModal(data:any) {
-    console.log(data)
+    this.ticket = data;
     this.isModalOpen = true;
   }
 

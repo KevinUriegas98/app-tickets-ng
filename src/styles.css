@@ -14,6 +14,47 @@ a {
 .btn {
     @apply w-[200px] mx-auto px-5 py-2.5 me-2 rounded-lg font-semibold bg-light-btn-bg hover:bg-light-btn-hover dark:bg-dark-btn-bg dark:hover:bg-dark-btn-hover text-white
 }
+
 .file-input{
     @apply text-gray-400 dark:text-gray-300 file:mr-2 file:px-4 file:py-2 file:rounded-lg file:font-semibold file:border-0 file:bg-sky-300 hover:file:bg-sky-400 file:text-white dark:file:bg-sky-500 dark:hover:file:bg-sky-600
+}
+
+.estatusCreado {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400 border-gray-500
+}
+
+.estatusAsignado {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-gray-700 dark:text-yellow-300 border-yellow-300
+}
+
+.estatusEnTratamiento {
+    @apply bg-indigo-100 text-indigo-800 dark:bg-gray-700 dark:text-indigo-400 border-indigo-400
+}
+
+.estatusFinalizado {
+    @apply bg-green-100 text-green-800 dark:bg-gray-700 dark:text-green-400 border-green-400
+}
+
+.bugStyle {
+    @apply bg-red-100 text-red-800 dark:bg-gray-700 dark:text-red-400 border border-red-400
+}
+
+.changeStyle {
+    @apply bg-indigo-100 text-indigo-800 dark:bg-gray-700 dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400
+}
+
+.fileWord {
+    @apply bg-blue-100 text-blue-800 dark:bg-gray-700 dark:text-blue-400 border-blue-400
+}
+
+.fileExcel {
+    @apply bg-green-100 text-green-800 dark:bg-gray-700 dark:text-green-400 border-green-400
+}
+
+.filePdf {
+    @apply bg-red-100 text-red-800 dark:bg-gray-700 dark:text-red-400 border-red-400
+}
+
+.fileImage {
+    @apply bg-indigo-100 text-indigo-800 dark:bg-gray-700 dark:text-indigo-400 border-indigo-400
 }

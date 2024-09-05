@@ -22,12 +22,22 @@ export type TicketEstatusResponse = ApiResponse<TicketEstatusModel[]>;
 export interface TicketEstatusModel
 {
     Ticket_Id: number;
+    Tipo_Ticket_Id: number;
+    Tipo_Ticket_Nombre: number;
     Ticket_Descripcion: string;
     Ticket_Fecha: string;
     Modulo_Nombre: string;
     Sistema_Nombre: string;
+    Estatus_Id: number;
     Estatus_Nombre: string;
     Usuario_Registra: string;
     Usuario_Asignado: string;
+    Comentarios: string;
+    Adjuntos: AdjuntoModel[];
+}
 
+interface AdjuntoModel
+{
+    FileName: string;
+    Format: string;
 }
