@@ -11,7 +11,8 @@
           [cdkDropListData]="status.tickets"
           (cdkDropListDropped)="drop($event, i)"
           [id]="'cdk-drop-list-' + i"
-          class="h-80 rounded-lg bg-gray-100 dark:bg-gray-800 p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
+          [ngClass]="(status.id == 1)?'estatusCreadoColumn':(status.id == 2)?'estatusAsignadoColumn':(status.id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
+          class="h-80 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
           <div *ngFor="let item of status.tickets" class="mb-2" cdkDrag>
             <a (click)="openModal(item)" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-light-bg hover:bg-gray-50 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
               <span>
@@ -24,19 +25,7 @@
                 </fa-icon>
               </span>
               <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion }}</span>
-              <span 
-                class="text-xs font-medium px-2.5 py-0.5 rounded border"
-                [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
-              >
-                <fa-icon 
-                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
-                  [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
-                  aria-hidden="true" 
-                  [icon]="(item.Estatus_Id == 1)?['fas', 'plus']:(item.Estatus_Id == 2)?['fas', 'user']:(item.Estatus_Id == 3)?['fas', 'screwdriver-wrench']:['fas', 'circle-check']" 
-                  size="lg">
-                </fa-icon>
-                {{ item.Estatus_Nombre }}
-              </span>
+
             </a>
           </div>
         </div>
