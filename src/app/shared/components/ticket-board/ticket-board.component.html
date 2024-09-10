@@ -1,7 +1,13 @@
 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-2">
   <div *ngFor="let status of statuses; let i = index" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-center">
-      <h5 class="text-xl font-bold text-gray-900 dark:text-white"> {{ status.name }}</h5>
+      <h5 class="text-xl font-bold text-gray-900 dark:text-white">  <fa-icon 
+        class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
+        [ngClass]="(status.id == 1)?'estatusCreadoIcon':(status.id == 2)?'estatusAsignadoIcon':(status.id == 3)?'estatusEnTratamientoIcon':'estatusFinalizadoIcon'"
+        aria-hidden="true" 
+        [icon]="(status.id == 1)?['fas', 'plus']:(status.id == 2)?['fas', 'user']:(status.id == 3)?['fas', 'screwdriver-wrench']:['fas', 'circle-check']" 
+        size="sm">
+      </fa-icon>{{ status.name }}</h5>
     </div>
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
       <li class="py-3 sm:py-4">
