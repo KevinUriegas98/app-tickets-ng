@@ -23,8 +23,15 @@ a {
     @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400 border-gray-500
 }
 
+.estatusCreadoColumn {
+    @apply bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-400 border-gray-100
+}
+
 .estatusAsignado {
     @apply bg-yellow-100 text-yellow-800 dark:bg-gray-700 dark:text-yellow-300 border-yellow-300
+}
+.estatusAsignadoColumn {
+    @apply bg-yellow-100 bg-opacity-50 text-yellow-800 dark:bg-gray-700 dark:text-yellow-300 border-yellow-300
 }
 
 .estatusEnTratamiento {
