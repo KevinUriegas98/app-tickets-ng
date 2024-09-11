@@ -48,7 +48,13 @@ export class TiposComponent {
         Tipo_Estatus: estatus
       };
 
-      const serviceCall =  this.tipoService.insertTipo(request)
+      const requestUpdate: TipoTicketModel = {
+        Tipo_Id: id,
+        Tipo_Nombre: nombre.trim(),
+        Tipo_Estatus: estatus
+      }
+
+      const serviceCall = id == 0 ?this.tipoService.insertTipo(request):this.tipoService.updateTipos(requestUpdate)
       serviceCall.subscribe({
         next: (res: any) => {
           this.resetForm();
@@ -72,7 +78,11 @@ export class TiposComponent {
   }
 
   editTipo(data: TipoTicketModel){
-    console.log(data);
+    this.form.patchValue({
+      id: data.Tipo_Id,
+      nombre: data.Tipo_Nombre,
+      estatus: data.Tipo_Estatus
+    })
   }
 
   deleteTipo(Tipo_Id: number) {

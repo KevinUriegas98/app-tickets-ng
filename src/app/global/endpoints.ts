@@ -34,5 +34,6 @@ export const modulos = {
 
 export const tipos = {
   get: `${environment.urlBase}GetAllTipos`,
-  insert: `${environment.urlBase}InsertTipo`
+  insert: `${environment.urlBase}InsertTipo`,
+  update: `${environment.urlBase}UpdateTipo`,
 }
