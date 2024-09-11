@@ -1,1 +1,17 @@
-<p>tipos works!</p>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Tipos Tickets | Tabla"
+        keyRow="Tipo_Id"
+        [headers]="['#','Nombre']"
+        [keys]="['Tipo_Id','Tipo_Nombre']"
+        [data]="tiposList"
+        [hasSearch]="true"
+        [hasStatus]="true"
+        keyStatus="Tipo_Estatus"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editTipo($event)"
+        (deleteEmit)="deleteTipo($event)"
+    >
+    </app-custom-table>
+</div>
