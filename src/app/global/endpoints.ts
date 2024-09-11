@@ -36,4 +36,5 @@ export const tipos = {
   get: `${environment.urlBase}GetAllTipos`,
   insert: `${environment.urlBase}InsertTipo`,
   update: `${environment.urlBase}UpdateTipo`,
+  delete: `${environment.urlBase}DeleteTipo`
 }

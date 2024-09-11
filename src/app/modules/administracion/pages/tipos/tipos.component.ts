@@ -86,6 +86,20 @@ export class TiposComponent {
   }
 
   deleteTipo(Tipo_Id: number) {
-    console.log(Tipo_Id);
-  }
+    this.sweetAlertService.confirm({
+      title: '¿Estás seguro que deseas eliminar permanentemente este tipo?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tipoService.deleteTipo(Tipo_Id)
+        .subscribe({
+          next: (res) => {
+            this.getAllTipos();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      }
+    });  }
 }

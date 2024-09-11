@@ -44,6 +44,16 @@ export class TipoService {
     )
   }
 
+  deleteTipo(id: number): Observable<boolean> {
+    const httpOptions = { headers: this.headers };
+    const url = `${tipos.delete}?Id=${id}`;
+    return this.http.delete<boolean>(url, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )  }
+
 }
 
 
