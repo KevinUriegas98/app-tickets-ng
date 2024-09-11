@@ -15,6 +15,8 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRightArrowLeft, faBug, faCircleCheck, faFileExcel, faFileImage, faFilePdf, faFileWord, faPlus, faScrewdriverWrench, faTrashCan, faUser, faUserTag, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TicketEstatusModel } from '@Models/Ticket';
+import { forkJoin } from 'rxjs';
+import { tickets } from '@Global/endpoints';
 
 @Component({
   selector: 'app-ticket-board',
@@ -26,7 +28,10 @@ import { TicketEstatusModel } from '@Models/Ticket';
 export class TicketBoardComponent {
   isModalOpen = false;
   ticket!: TicketEstatusModel;
-  
+
+  estatusList: EstatusTicketModel[] = [];
+  ticketsList: TicketEstatusModel[] = [];
+  statuses: any[] = []
 
   constructor(library: FaIconLibrary) {
     library.addIcons(
@@ -47,13 +52,9 @@ export class TicketBoardComponent {
 
   private estatusTicketService = inject(EstatusTicketService);
   private ticketService = inject(TicketService);
-  estatusList: EstatusTicketModel[] = [];
-  ticketsList: TicketEstatusModel[] = [];
-  statuses: any[] = []
   
   ngOnInit() {
-    this.getTickets();
-    this.getEstatus();
+    this.getTicketsEstatus();
   }
 
   // statuses = [
@@ -71,23 +72,39 @@ export class TicketBoardComponent {
   //   ]}
   // ];
 
-  getEstatus() {
-    this.estatusTicketService.getAllEstatusTickets().subscribe((data) => {
-      this.estatusList = data.response;
-      
+  getTicketsEstatus(){
+    forkJoin({
+      tickets: this.ticketService.getTicketsEstatus(),
+      estatus: this.estatusTicketService.getAllEstatusTickets()
+    }).subscribe(({ tickets, estatus }) => {
+      this.ticketsList = tickets.response;
+      this.estatusList = estatus.response;
+  
       this.statuses = this.estatusList.map((estatus) => ({
         id: estatus.Estatus_Id,
         name: estatus.Estatus_Nombre,
-        tickets: this.ticketsList.filter((ticket)  => ticket.Estatus_Nombre === estatus.Estatus_Nombre)
+        tickets: this.ticketsList.filter((ticket) => ticket.Estatus_Id === estatus.Estatus_Id)
       }));
-    })
+    });
+  
   }
+  // getEstatus() {
+  //   this.estatusTicketService.getAllEstatusTickets().subscribe((data) => {
+  //     this.estatusList = data.response;
+      
+  //     this.statuses = this.estatusList.map((estatus) => ({
+  //       id: estatus.Estatus_Id,
+  //       name: estatus.Estatus_Nombre,
+  //       tickets: this.ticketsList.filter((ticket)  => ticket.Estatus_Nombre === estatus.Estatus_Nombre)
+  //     }));
+  //   })
+  // }
 
-  getTickets() {
-    this.ticketService.getTicketsEstatus().subscribe((data) => {
-      this.ticketsList = data.response;
-    })
-  }
+  // getTickets() {
+  //   this.ticketService.getTicketsEstatus().subscribe((data) => {
+  //     this.ticketsList = data.response;
+  //   })
+  // }
   getConnectedDropListIds(index: number): string[] {
     return this.statuses.map((_, idx) => `cdk-drop-list-${idx}`);
   }

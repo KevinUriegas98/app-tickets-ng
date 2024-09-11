@@ -23,7 +23,7 @@
                   size="lg">
                 </fa-icon>
               </span>
-              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion }}</span>
+              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion}}{{item.Estatus_Id}}</span>
               <span 
                 class="text-xs font-medium px-2.5 py-0.5 rounded border"
                 [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
