@@ -1,9 +1,4 @@
 import { Component, inject } from '@angular/core';
-
-import { EstatusTicketService } from '@Services';
-import { EstatusTicketModel } from '@Models/StatusTickets';
-import { TicketService } from '@Services';
-
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -12,17 +7,21 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowRightArrowLeft, faBug, faCircleCheck, faFileExcel, faFileImage, faFilePdf, faFileWord, faPlus, faScrewdriverWrench, faTrashCan, faUser, faUserTag, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { TicketEstatusModel } from '@Models/Ticket';
-import { IconCustomComponent } from "@Component/IconCustom";
 import { forkJoin } from 'rxjs';
 import { tickets } from '@Global/endpoints';
+
+import { EstatusTicketService } from '@Services';
+import { TicketService } from '@Services';
+
+import { EstatusTicketModel } from '@Models/StatusTickets';
+import { TicketEstatusModel } from '@Models/Ticket';
+
+import { IconCustomComponent } from "@Component/IconCustom";
 
 @Component({
   selector: 'app-ticket-board',
   standalone: true,
-  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, IconCustomComponent],
+  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, IconCustomComponent],
   templateUrl: './ticket-board.component.html',
   styleUrl: './ticket-board.component.css'
 })
@@ -34,22 +33,7 @@ export class TicketBoardComponent {
   ticketsList: TicketEstatusModel[] = [];
   statuses: any[] = [];
 
-  constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faXmark,
-      faTrashCan,
-      faBug,
-      faArrowRightArrowLeft,
-      faPlus,
-      faUser,
-      faScrewdriverWrench,
-      faCircleCheck,
-      faFileExcel,
-      faFileWord,
-      faFilePdf,
-      faFileImage
-    );
-  }
+  constructor() {}
 
   private estatusTicketService = inject(EstatusTicketService);
   private ticketService = inject(TicketService);
