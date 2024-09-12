@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FaIconLibrary, FontAwesomeModule, SizeProp } from '@fortawesome/angular-fontawesome';
-import { faArrowRightArrowLeft, faBug, faCircleCheck, faClock, faFileExcel, faFileImage, faFilePdf, faFileWord, faPlus, faScrewdriverWrench, faTrashCan, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightArrowLeft, faBug, faCircleCheck, faClock, faDownload, faFileExcel, faFileImage, faFilePdf, faFileWord, faPen, faPlus, faScrewdriverWrench, faSearch, faTrashCan, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-icon-custom',  // Asegúrate de que este selector sea el mismo que el usado en el HTML
@@ -17,22 +17,7 @@ export class IconCustomComponent implements OnInit {
   icon: any = "";
   color: string = "";
 
-  constructor(library: FaIconLibrary) {
-    // Añadir los iconos al library
-    library.addIcons(
-      faXmark,
-      faTrashCan,
-      faBug,
-      faArrowRightArrowLeft,
-      faPlus,
-      faUser,
-      faScrewdriverWrench,
-      faCircleCheck,
-      faFileExcel,
-      faFileWord,
-      faFilePdf,
-      faFileImage
-    );
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -110,6 +95,25 @@ export class IconCustomComponent implements OnInit {
         case 4:
           this.icon = faCircleCheck;
           this.color = 'estatusFinalizadoIcon';
+          break;
+      }
+    } else if (this.typeIcon === "table"){
+      switch (this.value) {
+        case "edit":
+          this.icon = faPen;
+          this.color = 'hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500';
+          break;
+        case "delete":
+          this.icon = faTrashCan;
+          this.color = 'hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500';
+          break;
+        case "search":
+          this.icon = faSearch;
+          this.color = 'text-gray-500 dark:text-gray-400';
+          break;
+        case "export":
+          this.icon = faDownload;
+          this.color = 'me-2';
           break;
       }
     } else {
