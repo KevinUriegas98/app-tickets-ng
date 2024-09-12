@@ -15,13 +15,14 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRightArrowLeft, faBug, faCircleCheck, faFileExcel, faFileImage, faFilePdf, faFileWord, faPlus, faScrewdriverWrench, faTrashCan, faUser, faUserTag, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TicketEstatusModel } from '@Models/Ticket';
+import { IconCustomComponent } from "@Component/IconCustom";
 import { forkJoin } from 'rxjs';
 import { tickets } from '@Global/endpoints';
 
 @Component({
   selector: 'app-ticket-board',
   standalone: true,
-  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, FontAwesomeModule],
+  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, IconCustomComponent],
   templateUrl: './ticket-board.component.html',
   styleUrl: './ticket-board.component.css'
 })
@@ -31,7 +32,7 @@ export class TicketBoardComponent {
 
   estatusList: EstatusTicketModel[] = [];
   ticketsList: TicketEstatusModel[] = [];
-  statuses: any[] = []
+  statuses: any[] = [];
 
   constructor(library: FaIconLibrary) {
     library.addIcons(
@@ -86,25 +87,8 @@ export class TicketBoardComponent {
         tickets: this.ticketsList.filter((ticket) => ticket.Estatus_Id === estatus.Estatus_Id)
       }));
     });
-  
   }
-  // getEstatus() {
-  //   this.estatusTicketService.getAllEstatusTickets().subscribe((data) => {
-  //     this.estatusList = data.response;
-      
-  //     this.statuses = this.estatusList.map((estatus) => ({
-  //       id: estatus.Estatus_Id,
-  //       name: estatus.Estatus_Nombre,
-  //       tickets: this.ticketsList.filter((ticket)  => ticket.Estatus_Nombre === estatus.Estatus_Nombre)
-  //     }));
-  //   })
-  // }
 
-  // getTickets() {
-  //   this.ticketService.getTicketsEstatus().subscribe((data) => {
-  //     this.ticketsList = data.response;
-  //   })
-  // }
   getConnectedDropListIds(index: number): string[] {
     return this.statuses.map((_, idx) => `cdk-drop-list-${idx}`);
   }
