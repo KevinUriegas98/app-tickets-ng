@@ -11,6 +11,7 @@
       "@EndPoints*": ["src/app/global/endpoints.ts"],
       "@Services": ["src/app/core/services"],
       "@Component/Table": ["src/app/shared/components/custom-table/custom-table.component.ts"],
+      "@Component/IconCustom": ["src/app/shared/components/icon-custom/icon-custom.component.ts"],
       "@Component/Layout": ["src/app/layout/components/layout/layout.component.ts"],
       "@Service/SweetAlert": ["src/app/shared/services/sweet-alert.service.ts"],
       "@Models/Response": ["src/app/core/models/response/response-model.ts"],
