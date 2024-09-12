@@ -4,6 +4,8 @@ import { Component, inject } from '@angular/core';
 
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
+import { ToastrService } from 'ngx-toastr';
+
 
 import { EstatusTicketInsertRequest, EstatusTicketModel } from '@Models/StatusTickets';
 import { EstatusTicketService } from '@Services';
@@ -19,6 +21,8 @@ export class EstatusTicketComponent {
   private fb = inject(FormBuilder);
   private estatusTicketService = inject(EstatusTicketService);
   private sweetAlertService = inject(SweetAlertService);
+  private toastr = inject(ToastrService);
+
 
   estatusList: EstatusTicketModel[] = [];
   form = this.fb.nonNullable.group({
@@ -52,6 +56,7 @@ export class EstatusTicketComponent {
         Estatus_Activo: activo
       };
       const serviceCall = id == 0 ?this.estatusTicketService.insertEstatusTicket(request):this.estatusTicketService.updateEstatusTicket(requestUpdate)
+      const mensaje = id == 0?"Estatus registrado exitosamente":"Estatus actualizado exitosamente";
       serviceCall.subscribe({
           next: (res: any) => {
             // Este es la ubicacion del archivo (src\app\core\interceptors\error.interceptor.ts)
@@ -67,6 +72,7 @@ export class EstatusTicketComponent {
             // }
             // const data = res;
             // this.toastr.success('Estatus registrado exitosamente');
+            this.toastr.success(mensaje);
             this.resetForm();
             this.getAllEstatus();
           },

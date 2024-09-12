@@ -44,7 +44,8 @@ export class TicketsComponent {
     tipo: [0,[Validators.required, Validators.min(1)]],
     sistema: [0, [Validators.required, Validators.min(1)]],
     modulo: [0, [Validators.required, Validators.min(1)]],
-    descripcion: ['', [Validators.required, Validators.maxLength(255)]]
+    descripcion: ['', [Validators.required, Validators.maxLength(55)]],
+    comentarios: ['', [Validators.required, Validators.maxLength(255)]]
   });
 
   ngOnInit(): void {
@@ -91,13 +92,14 @@ export class TicketsComponent {
   
   onSubmit(): void{
     if (this.form.valid) {
-      const { id, tipo, sistema, modulo, descripcion } = this.form.getRawValue();
+      const { id, tipo, sistema, modulo, descripcion, comentarios } = this.form.getRawValue();
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: TicketInsertRequest = {
         Usuario_Registra: usuarioRegistra,
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
+        Ticket_Comentarios: comentarios.trim(),
         Ticket_Estatus: 1
       }
 
@@ -106,6 +108,7 @@ export class TicketsComponent {
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
+        Ticket_Comentarios: comentarios.trim(),
         Ticket_Estatus: 1,
         Usuario_Registra: usuarioRegistra
       }
