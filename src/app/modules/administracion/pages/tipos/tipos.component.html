@@ -1,1 +1,37 @@
-<p>tipos works!</p>
+<div class="w-full p-4 bg-light-bg border border-light-border rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-bg dark:border-dark-border">
+    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+        <h5 class="text-xl font-medium text-light-text dark:text-dark-text">Tipos Ticket | Formulario</h5>
+        <div class="grid md:grid-cols-2 md:gap-9">
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Nombre de tipo</label>
+                <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Error"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['required']">Nombre de Tipo Requerido*</p>
+                    <p class="text-sm italic text-danger" *ngIf="form.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios*</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-light-border dark:border-dark-border">
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="btn">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Tipos Tickets | Tabla"
+        keyRow="Tipo_Id"
+        [headers]="['#','Nombre']"
+        [keys]="['Tipo_Id','Tipo_Nombre']"
+        [data]="tiposList"
+        [hasSearch]="true"
+        [hasStatus]="true"
+        keyStatus="Tipo_Estatus"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editTipo($event)"
+        (deleteEmit)="deleteTipo($event)"
+    >
+    </app-custom-table>
+</div>

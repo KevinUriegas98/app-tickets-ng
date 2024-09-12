@@ -6,13 +6,14 @@ import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 
 import { TicketEstatusModel, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
-import { TicketService } from '@Services';
+import { TicketService, TipoService } from '@Services';
 
 import { SistemaService } from '@Services';
 import { SistemaModel } from '@Models/Sistema';
 
 import { ModuloService } from '@Services';
 import { ModuloModel } from '@Models/Modulo';
+import { TipoTicketModel } from '@Models/Tipo';
 
 @Component({
   selector: 'app-tickets',
@@ -27,11 +28,13 @@ export class TicketsComponent {
   private ticketService = inject(TicketService);
   private sistemaService = inject(SistemaService);
   private moduloService = inject(ModuloService);
+  private tipoService = inject(TipoService);
   private sweetAlertService = inject(SweetAlertService);
 
   sistemasList: SistemaModel[] = [];
   modulosBySistema: ModuloModel[] = [];
   modulosList: ModuloModel[] = [];
+  tiposList: TipoTicketModel[] = [];
 
   ticketsList:TicketEstatusModel[] = [];
 
@@ -45,6 +48,7 @@ export class TicketsComponent {
   });
 
   ngOnInit(): void {
+    this.getTipos();
     this.getSistemas();
     this.getModulos();
     this.getTickets();
@@ -54,9 +58,14 @@ export class TicketsComponent {
   {
     this.ticketService.getTicketsEstatus().subscribe((data) => {
       this.ticketsList = data.response;
+      console.log(this.ticketsList)
     });
   }
-
+  getTipos() {
+    this.tipoService.getAllTipos().subscribe((data) => {
+      this.tiposList = data.response;
+    })
+  }
   getSistemas() {
     this.sistemaService.getAllSistemas().subscribe((data) => {
       this.sistemasList = data.response;
@@ -85,7 +94,7 @@ export class TicketsComponent {
       const { id, tipo, sistema, modulo, descripcion } = this.form.getRawValue();
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: TicketInsertRequest = {
-        Usuario_Registra: 1,
+        Usuario_Registra: usuarioRegistra,
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
@@ -125,8 +134,13 @@ export class TicketsComponent {
     const modulo = this.modulosBySistema.find(modulo => modulo.Modulo_Nombre === data.Modulo_Nombre);
     const moduloId = modulo ? modulo.Modulo_Id : 0;
 
+    const tipo = this.tiposList.find(tipo => tipo.Tipo_Nombre === data.Tipo_Ticket_Nombre);
+    const tipoId = tipo ? tipo.Tipo_Id : 0;
+
+
     this.form.patchValue({
       id: data.Ticket_Id,
+      tipo: tipoId,
       sistema: sistemaId,
       modulo: moduloId,
       descripcion: data.Ticket_Descripcion

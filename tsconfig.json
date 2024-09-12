@@ -20,7 +20,8 @@
       "@Models/Perfil": ["src/app/core/models/perfil"],
       "@Models/Ticket": ["src/app/core/models/tickets"],
       "@Models/Sistema": ["src/app/core/models/sistemas"],
-      "@Models/Modulo": ["src/app/core/models/modulos"]
+      "@Models/Modulo": ["src/app/core/models/modulos"],
+      "@Models/Tipo": ["src/app/core/models/tipos"],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

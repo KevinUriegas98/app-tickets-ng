@@ -6,8 +6,7 @@
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Tipo Ticket</label>
                 <select formControlName="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     <option [value]="0" disabled>Tipos</option>
-                    <option [value]="1">Error</option>
-                    <option [value]="2">Cambio</option>
+                    <option *ngFor="let tipo of tiposList" [value]="tipo.Tipo_Id">{{tipo.Tipo_Nombre}}</option>
                 </select>
                 <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid">
                     <p class="text-sm italic text-danger" *ngIf="form.get('tipo')?.errors?.['min']">Seleccione un tipo*</p>

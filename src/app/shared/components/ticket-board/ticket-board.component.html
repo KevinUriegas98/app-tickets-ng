@@ -30,8 +30,20 @@
                   size="lg">
                 </fa-icon>
               </span>
-              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion }}</span>
-
+              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion}}</span>
+              <span 
+                class="text-xs font-medium px-2.5 py-0.5 rounded border"
+                [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
+              >
+                <fa-icon 
+                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
+                  [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
+                  aria-hidden="true" 
+                  [icon]="(item.Estatus_Id == 1)?['fas', 'plus']:(item.Estatus_Id == 2)?['fas', 'user']:(item.Estatus_Id == 3)?['fas', 'screwdriver-wrench']:['fas', 'circle-check']" 
+                  size="lg">
+                </fa-icon>
+                {{ item.Estatus_Nombre }}
+              </span>
             </a>
           </div>
         </div>
