@@ -3,7 +3,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FooterComponent } from "../footer/footer.component";
 
 import { images } from '@Constants';
@@ -20,6 +20,8 @@ export class SidebarComponent {
   private router = inject(Router);
 
   isSidebarOpen = false;
+  isTicketsDropdownOpen = false;
+  isConfigurationDropdownOpen = false;
   userName: string = "";
   savedTheme: any = ""
   private isBrowser: boolean;
@@ -30,6 +32,8 @@ export class SidebarComponent {
       faFilePen,
       faRectangleList,
       faCircleUser,
+      faChevronDown,
+      faChevronUp,
       faRightFromBracket,
       faSun,
       faCircleInfo,
@@ -67,5 +71,13 @@ export class SidebarComponent {
 
   toggleSidebar():void{
     this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  toggleTicketsDropdown(){
+    this.isTicketsDropdownOpen = !this.isTicketsDropdownOpen;
+  }
+
+  toggleConfigurationDropdown(){
+    this.isConfigurationDropdownOpen = !this.isConfigurationDropdownOpen;
   }
 }

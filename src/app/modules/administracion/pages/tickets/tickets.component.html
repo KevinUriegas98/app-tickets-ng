@@ -1,7 +1,7 @@
 <div class="w-full p-4 bg-light-bg border border-light-border rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-bg dark:border-dark-border">
     <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
         <h5 class="text-xl font-medium text-light-text dark:text-dark-text">Crear Ticket</h5>
-        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 md:gap-6">
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Tipo Ticket</label>
                 <select formControlName="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
@@ -39,7 +39,15 @@
                 <input formControlName="descripcion" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Descripción"/>
                 <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid">
                     <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['required']">Descripción requerida*</p>
-                    <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['maxLength']">Máximo de caracteres 255*</p>
+                    <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['maxLength']">Máximo de caracteres 55*</p>
+                </div>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Comentarios</label>
+                <input formControlName="comentarios" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Descripción"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('comentarios')?.touched && form.get('comentarios')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
+                    <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['maxLength']">Máximo de caracteres 255*</p>
                 </div>
             </div>
             <div class="relative z-0 w-full mb-5 group">

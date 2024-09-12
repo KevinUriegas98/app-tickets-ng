@@ -5,6 +5,7 @@ export interface TicketInsertRequest {
     Ticket_Tipo: number;
     Modulo_Id: number;
     Ticket_Descripcion: string;
+    Ticket_Comentarios: string;
     Ticket_Estatus: number;
 };
 
@@ -14,6 +15,7 @@ export interface TicketUpdateRequest{
     Ticket_Tipo: number;
     Modulo_Id: number;
     Ticket_Descripcion: string;
+    Ticket_Comentarios: string;
     Ticket_Estatus: number;
 }
 
@@ -23,6 +25,7 @@ export interface TicketEstatusModel
 {
     Ticket_Id: number;
     Ticket_Descripcion: string;
+    Ticket_Comentarios: string;
     Ticket_Fecha: string;
     Tipo_Ticket_Id: number;
     Tipo_Ticket_Nombre: string;
@@ -32,7 +35,6 @@ export interface TicketEstatusModel
     Estatus_Nombre: string;
     Usuario_Registra: string;
     Usuario_Asignado: string;
-    Comentarios: string;
     Adjuntos: AdjuntoModel[];
 }
 

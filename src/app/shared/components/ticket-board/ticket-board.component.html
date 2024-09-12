@@ -18,10 +18,29 @@
           class="h-80 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
           <div *ngFor="let item of status.tickets" class="mb-2 relative" cdkDrag>
             <a (click)="openModal(item)" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-light-bg hover:bg-gray-50 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-              <!-- <span>
-                <app-icon-custom typeIcon="typeTicket" [value]="item.Tipo_Ticket_Id"></app-icon-custom>
-              </span> -->
-              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion }}</span> 
+              <span>
+                <fa-icon 
+                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
+                  [ngClass]="(item.Tipo_Ticket_Id == 1)?'text-red-600 dark:text-red-400':'text-blue-600 dark:text-blue-400'"
+                  aria-hidden="true" 
+                  [icon]="(item.Tipo_Ticket_Id == 1)?['fas', 'bug']:['fas', 'arrow-right-arrow-left']" 
+                  size="lg">
+                </fa-icon>
+              </span>
+              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion}} </span>
+              <span 
+                class="text-xs font-medium px-2.5 py-0.5 rounded border"
+                [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
+              >
+                <fa-icon 
+                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
+                  [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
+                  aria-hidden="true" 
+                  [icon]="(item.Estatus_Id == 1)?['fas', 'plus']:(item.Estatus_Id == 2)?['fas', 'user']:(item.Estatus_Id == 3)?['fas', 'screwdriver-wrench']:['fas', 'circle-check']" 
+                  size="lg">
+                </fa-icon>
+                {{ item.Estatus_Nombre }}
+              </span>
             </a>
             <!-- <div class="text-xs text-gray-400 absolute bottom-1 right-1">
               <app-icon-custom typeIcon="custom" sizeIcon="sm"></app-icon-custom>
@@ -89,7 +108,7 @@
     </div>
     <div *ngIf="ticket.Estatus_Id == 4">
       <h5 class="text-md font-medium text-gray-900 dark:text-white">Comentarios Dev:</h5>
-      <p class="text-sm text-gray-500 dark:text-gray-400 "> {{ticket.Comentarios}} </p>
+      <p class="text-sm text-gray-500 dark:text-gray-400 "> {{ticket.Ticket_Comentarios}} </p>
     </div>
     <div class="mt-3 flex justify-end">
       <button class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" (click)="closeModal()">
