@@ -3,10 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
+import { IconCustomComponent } from '@Component/IconCustom';
+
 @Component({
   selector: 'app-custom-table',
   standalone: true,
-  imports: [NgFor, NgIf, FontAwesomeModule, NgClass],
+  imports: [NgFor, NgIf, FontAwesomeModule, NgClass, IconCustomComponent],
   templateUrl: './custom-table.component.html'
 })
 export class CustomTableComponent {
@@ -17,6 +19,7 @@ export class CustomTableComponent {
   @Input() headers: any[] = [];
   @Input() data: any[] = [];
   @Input() keys: any[] = [];
+  @Input() hasPagination: boolean = false;
   @Input() hasExport: boolean = false;
   @Input() hasSearch: boolean = false;
   @Input() hasEdit: boolean = false;
@@ -25,12 +28,7 @@ export class CustomTableComponent {
   @Output() editEmit: EventEmitter<any> = new EventEmitter();
   @Output() deleteEmit: EventEmitter<number> = new EventEmitter();
 
-  constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faPen,
-      faTrashCan
-    );
-  }
+  constructor() {}
 
   editRow(data:any) {
     this.editEmit.emit(data)
