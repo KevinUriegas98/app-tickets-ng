@@ -1,17 +1,14 @@
 import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
-
 import { TicketEstatusModel, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
-import { TicketService, TipoService } from '@Services';
+import { TicketService, TipoService, SistemaService, ModuloService } from '@Services';
 
-import { SistemaService } from '@Services';
 import { SistemaModel } from '@Models/Sistema';
-
-import { ModuloService } from '@Services';
 import { ModuloModel } from '@Models/Modulo';
 import { TipoTicketModel } from '@Models/Tipo';
 
@@ -35,7 +32,6 @@ export class TicketsComponent {
   modulosBySistema: ModuloModel[] = [];
   modulosList: ModuloModel[] = [];
   tiposList: TipoTicketModel[] = [];
-
   ticketsList:TicketEstatusModel[] = [];
 
 
@@ -50,8 +46,7 @@ export class TicketsComponent {
 
   ngOnInit(): void {
     this.getTipos();
-    this.getSistemas();
-    this.getModulos();
+    this.getSistemasModulos();
     this.getTickets();
   }
 
@@ -59,7 +54,6 @@ export class TicketsComponent {
   {
     this.ticketService.getTicketsEstatus().subscribe((data) => {
       this.ticketsList = data.response;
-      console.log(this.ticketsList)
     });
   }
   getTipos() {
@@ -67,27 +61,20 @@ export class TicketsComponent {
       this.tiposList = data.response;
     })
   }
-  getSistemas() {
-    this.sistemaService.getAllSistemas().subscribe((data) => {
-      this.sistemasList = data.response;
-    });
-  }
-
-  getModulos() {
-    this.moduloService.getAllModulos().subscribe((data) => {
-      this.modulosList = data.response;
+  getSistemasModulos(){
+    forkJoin({
+      sistemas: this.sistemaService.getAllSistemas(),
+      modulos: this.moduloService.getAllModulos()
+    }).subscribe(({sistemas, modulos})=>{
+      this.sistemasList = sistemas.response;
+      this.modulosList = modulos.response;
     });
   }
 
   filterModulos(event: Event) {
     const Sistema_Id = +(event.target as HTMLSelectElement).value;
-
     this.modulosBySistema = this.modulosList.filter(modulo => modulo.Sistema_Id == Sistema_Id);
-    if (this.modulosList.length > 0) {
-      this.form.controls['modulo'].setValue(this.modulosList[0].Modulo_Id);
-    } else {
-      this.form.controls['modulo'].setValue(0);
-    }
+    this.form.controls['modulo'].setValue(this.modulosBySistema.length > 0 ? this.modulosBySistema[0].Modulo_Id : 0)
   }
   
   onSubmit(): void{
@@ -134,9 +121,6 @@ export class TicketsComponent {
     const sistema = this.sistemasList.find(sistema => sistema.Sistema_Nombre === data.Sistema_Nombre);
     const sistemaId = sistema ? sistema.Sistema_Id : 0;
 
-    const modulo = this.modulosBySistema.find(modulo => modulo.Modulo_Nombre === data.Modulo_Nombre);
-    const moduloId = modulo ? modulo.Modulo_Id : 0;
-
     const tipo = this.tiposList.find(tipo => tipo.Tipo_Nombre === data.Tipo_Ticket_Nombre);
     const tipoId = tipo ? tipo.Tipo_Id : 0;
 
@@ -145,8 +129,14 @@ export class TicketsComponent {
       id: data.Ticket_Id,
       tipo: tipoId,
       sistema: sistemaId,
-      modulo: moduloId,
       descripcion: data.Ticket_Descripcion
+    })
+
+    this.modulosBySistema = this.modulosList.filter(modulo => modulo.Sistema_Id === sistemaId);
+    const modulo = this.modulosBySistema.find(modulo => modulo.Modulo_Nombre === data.Modulo_Nombre);
+    const moduloId = modulo ? modulo?.Modulo_Id : 0;
+    this.form.patchValue({
+      modulo:moduloId
     })
   }
 
