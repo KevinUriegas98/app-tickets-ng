@@ -15,13 +15,14 @@ import { TicketService } from '@Services';
 
 import { EstatusTicketModel } from '@Models/StatusTickets';
 import { TicketEstatusModel } from '@Models/Ticket';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IconCustomComponent } from "@Component/IconCustom";
 
 @Component({
   selector: 'app-ticket-board',
   standalone: true,
-  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, IconCustomComponent],
+  imports: [NgFor, NgIf, CommonModule, CdkDropList, CdkDrag, IconCustomComponent, FontAwesomeModule],
   templateUrl: './ticket-board.component.html',
   styleUrl: './ticket-board.component.css'
 })

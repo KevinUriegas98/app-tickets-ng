@@ -20,8 +20,9 @@ export type GetModulosResponse = ApiResponse<ModuloModel[]>;
 export interface ModuloModel {
     Modulo_Id: number;
     Sistema_Id: number;
+    Sistema_Nombre: string;
     Modulo_Nombre: string;
     Modulo_Estatus: number;
-    Usuario_Registra: number;
+    Usuario_Registra: string;
     Fecha_Registro: string;
 }

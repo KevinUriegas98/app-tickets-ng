@@ -54,12 +54,13 @@ export class ModulosComponent {
   onSubmit(): void{
     if (this.form.valid) {
       const { id, nombre, sistema } = this.form.getRawValue();
+      const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
 
       const request: ModuloInsertRequest = {
         Modulo_Nombre: nombre.trim(),
         Sistema_Id: sistema,
         Modulo_Estatus: 1,
-        Usuario_Registra: 1
+        Usuario_Registra: usuarioRegistra
       }
 
       const requestUpdate: ModuloUpdateRequest = {
@@ -67,7 +68,7 @@ export class ModulosComponent {
         Modulo_Nombre: nombre.trim(),
         Sistema_Id: sistema,
         Modulo_Estatus: 1,
-        Usuario_Registra: 1
+        Usuario_Registra: usuarioRegistra
       }
 
       const serviceCall = id == 0 ? this.moduloService.insertModulo(request) : this.moduloService.updateModulo(requestUpdate);
