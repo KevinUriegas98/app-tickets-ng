@@ -40,6 +40,7 @@ export class TicketsComponent {
     tipo: [0,[Validators.required, Validators.min(1)]],
     sistema: [0, [Validators.required, Validators.min(1)]],
     modulo: [0, [Validators.required, Validators.min(1)]],
+    titulo: ['', [Validators.required, Validators.maxLength(50)]],
     descripcion: ['', [Validators.required, Validators.maxLength(55)]],
     comentarios: ['', [Validators.required, Validators.maxLength(255)]]
   });
@@ -79,7 +80,7 @@ export class TicketsComponent {
   
   onSubmit(): void{
     if (this.form.valid) {
-      const { id, tipo, sistema, modulo, descripcion, comentarios } = this.form.getRawValue();
+      const { id, tipo, sistema, modulo, descripcion, comentarios, titulo } = this.form.getRawValue();
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: TicketInsertRequest = {
         Usuario_Registra: usuarioRegistra,
@@ -87,6 +88,7 @@ export class TicketsComponent {
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
         Ticket_Comentarios: comentarios.trim(),
+        Ticket_Titulo: titulo,
         Ticket_Estatus: 1
       }
 
@@ -97,6 +99,7 @@ export class TicketsComponent {
         Ticket_Descripcion: descripcion.trim(),
         Ticket_Comentarios: comentarios.trim(),
         Ticket_Estatus: 1,
+        Ticket_Titulo: titulo,
         Usuario_Registra: usuarioRegistra
       }
 

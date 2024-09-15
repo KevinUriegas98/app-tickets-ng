@@ -35,8 +35,16 @@
                 </div>
             </div>
             <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Título</label>
+                <input formControlName="titulo" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Título"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('titulo')?.touched && form.get('titulo')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('titulo')?.errors?.['titulo']">Descripción requerida*</p>
+                    <p class="text-sm italic text-danger" *ngIf="form.get('titulo')?.errors?.['titulo']">Máximo de caracteres 50*</p>
+                </div>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Descripción</label>
-                <input formControlName="descripcion" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Descripción"/>
+                <textarea formControlName="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
                 <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid">
                     <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['required']">Descripción requerida*</p>
                     <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['maxLength']">Máximo de caracteres 55*</p>
@@ -44,7 +52,7 @@
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Comentarios</label>
-                <input formControlName="comentarios" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Descripción"/>
+                <input formControlName="comentarios" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Comentarios"/>
                 <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('comentarios')?.touched && form.get('comentarios')?.invalid">
                     <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
                     <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['maxLength']">Máximo de caracteres 255*</p>

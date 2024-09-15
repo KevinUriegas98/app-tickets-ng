@@ -6,6 +6,7 @@ export interface TicketInsertRequest {
     Modulo_Id: number;
     Ticket_Descripcion: string;
     Ticket_Comentarios: string;
+    Ticket_Titulo: string;
     Ticket_Estatus: number;
 };
 
@@ -16,6 +17,7 @@ export interface TicketUpdateRequest{
     Modulo_Id: number;
     Ticket_Descripcion: string;
     Ticket_Comentarios: string;
+    Ticket_Titulo: string;
     Ticket_Estatus: number;
 }
 
