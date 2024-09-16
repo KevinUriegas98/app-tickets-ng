@@ -45,7 +45,12 @@ export class TiposSistemaComponent {
         TipoSistema_Descripcion: descripcion.trim()
       }
 
-      const serviceCall = this.tipoService.insertTipoSistema(request);
+      const requestUpdate: TipoSistemaModel = {
+        TipoSistema_Id: id,
+        TipoSistema_Descripcion: descripcion.trim()
+      }
+
+      const serviceCall = id == 0 ?this.tipoService.insertTipoSistema(request) : this.tipoService.updateTipoSistema(requestUpdate);
       serviceCall.subscribe({
         next: (res: any) => {
           this.resetForm();
@@ -67,7 +72,10 @@ export class TiposSistemaComponent {
     })
   }
   editTipoSistema(data: TipoSistemaModel) {
-    console.log(data);
+    this.form.patchValue({
+      id: data.TipoSistema_Id,
+      descripcion: data.TipoSistema_Descripcion
+    })
   }
 
   deleteTipoSistema(TipoSistema_Id: number) {

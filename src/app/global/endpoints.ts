@@ -42,4 +42,5 @@ export const tipos = {
 export const tiposSistema = {
   get: `${environment.urlBase}GetAllTiposSistemas`,
   insert: `${environment.urlBase}InsertTipoSistema`,
+  update: `${environment.urlBase}UpdateTipoSistema`
 }

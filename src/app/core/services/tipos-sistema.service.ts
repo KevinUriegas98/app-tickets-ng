@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { tiposSistema } from '@EndPoints';
-import { GetTiposSistemaResponse, TipoSistemaInsertRequest } from '@Models/TipoSistema';
+import { GetTiposSistemaResponse, TipoSistemaInsertRequest, TipoSistemaModel } from '@Models/TipoSistema';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,17 @@ export class TiposSistemaService {
   {
     const httpOptions = { headers: this.headers };
     return this.http.get<GetTiposSistemaResponse>(tiposSistema.get, httpOptions)
+      .pipe(
+        map(res => {
+          return res;
+        })
+    )
+  }
+
+  updateTipoSistema(tipo: TipoSistemaModel): Observable<boolean>
+  {
+    const httpOptions = { headers: this.headers };
+    return this.http.put<boolean>(tiposSistema.update, tipo, httpOptions)
       .pipe(
         map(res => {
           return res;
