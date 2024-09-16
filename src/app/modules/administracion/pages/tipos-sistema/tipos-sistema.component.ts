@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 
 import { TipoSistemaInsertRequest, TipoSistemaModel } from '@Models/TipoSistema';
 import { TiposSistemaService } from '@Services';
+import { SweetAlertService } from '@Service/SweetAlert';
 
 @Component({
   selector: 'app-tipos-sistema',
@@ -19,6 +20,7 @@ export class TiposSistemaComponent {
   private fb = inject(FormBuilder);
  
   private tipoService = inject(TiposSistemaService);
+  private sweetAlertService = inject(SweetAlertService);
   
   tiposList: TipoSistemaModel[] = [];
 
@@ -79,7 +81,22 @@ export class TiposSistemaComponent {
   }
 
   deleteTipoSistema(TipoSistema_Id: number) {
-    console.log(TipoSistema_Id);
+    this.sweetAlertService.confirm({
+      title: '¿Estás seguro que deseas eliminar este tipo de sistema?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tipoService.deleteTipoSistema(TipoSistema_Id)
+          .subscribe({
+            next: (res) => {
+              this.getAllTiposSistemas();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          })
+      }
+    })
   }
 
 }

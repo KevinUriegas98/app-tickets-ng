@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
-import { tiposSistema } from '@EndPoints';
+import { tipos, tiposSistema } from '@EndPoints';
 import { GetTiposSistemaResponse, TipoSistemaInsertRequest, TipoSistemaModel } from '@Models/TipoSistema';
 
 @Injectable({
@@ -44,6 +44,17 @@ export class TiposSistemaService {
         map(res => {
           return res;
         })
+    )
+  }
+
+  deleteTipoSistema(id: number): Observable<boolean>{
+    const httpOptions = { headers: this.headers };
+    const url = `${tiposSistema.delete}?Id=${id}`
+    return this.http.delete<boolean>(url, httpOptions)
+      .pipe(
+        map(res => {
+          return res;
+      })
     )
   }
 
