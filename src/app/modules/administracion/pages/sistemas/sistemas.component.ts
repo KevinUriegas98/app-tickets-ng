@@ -1,4 +1,4 @@
-import { NgIf } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Component, inject, Injectable } from "@angular/core";
 
@@ -6,21 +6,25 @@ import { CustomTableComponent } from "@Component/Table";
 import { SweetAlertService } from "@Service/SweetAlert";
 
 import { SistemaInsertRequest, SistemaUpdateRequest, SistemaModel } from "@Models/Sistema";
-import { SistemaService } from "@Services";
+import { SistemaService, TiposSistemaService } from "@Services";
+import { TipoSistemaModel } from "@Models/TipoSistema";
 
 @Component({
   selector: 'app-sistemas',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CustomTableComponent],
+  imports: [ReactiveFormsModule, NgIf, NgFor, CustomTableComponent],
   templateUrl: './sistemas.component.html',
 })
 export class SistemasComponent {
   constructor() { }
   private fb = inject(FormBuilder);
   private sistemaService = inject(SistemaService);
+  private tipoSistemaService = inject(TiposSistemaService);
   private sweetAlertService = inject(SweetAlertService);
 
   sistemasList: SistemaModel[] = []
+  tiposList: TipoSistemaModel[] = []
+
 
   form = this.fb.nonNullable.group({
     id: [0],
@@ -30,8 +34,14 @@ export class SistemasComponent {
 
   ngOnInit(): void{
     this.getAllSistemas();
+    this.getAllTiposSistema();
   }
 
+  getAllTiposSistema() {
+    this.tipoSistemaService.getAllTiposSistemas().subscribe((data) => {
+      this.tiposList = data.response;
+    })
+  }
   getAllSistemas() {
     this.sistemaService.getAllSistemas().subscribe((data) => {
       this.sistemasList = data.response;
@@ -44,7 +54,7 @@ export class SistemasComponent {
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
       const request: SistemaInsertRequest = {
         Sistema_Nombre: nombre.trim(),
-        Sistema_Tipo: tipo,
+        Tipo_Id: tipo,
         Sistema_Estatus: 1,
         Usuario_Registra: usuarioRegistra
       }
@@ -52,7 +62,7 @@ export class SistemasComponent {
       const requestUpdate: SistemaUpdateRequest = {
         Sistema_Id: id,
         Sistema_Nombre: nombre.trim(),
-        Sistema_Tipo: tipo,
+        Tipo_Id: tipo,
         Sistema_Estatus: 1,
         Usuario_Registra: usuarioRegistra
       }
@@ -83,7 +93,7 @@ export class SistemasComponent {
     this.form.patchValue({
       id: data.Sistema_Id,
       nombre: data.Sistema_Nombre,
-      tipo: data.Sistema_Tipo
+      tipo: data.Tipo_Id
     });
   }
 

@@ -13,7 +13,7 @@
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Tipo</label>
                 <select formControlName="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     <option [value]="0" disabled>Tipos</option>
-                    <option [value]="1">Soporte</option>
+                    <option *ngFor="let tipo of tiposList" [value]="tipo.TipoSistema_Id">{{tipo.TipoSistema_Descripcion}}</option>
                 </select>
                 <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid">
                     <p class="text-sm italic text-danger" *ngIf="form.get('tipo')?.errors?.['min']">Seleccione un tipo*</p>
@@ -32,7 +32,7 @@
         tableHead="Sistemas | Tabla"
         keyRow="Sistema_Id"
         [headers]="['#','Nombre', 'Tipo', 'Fecha Registro', 'Usuario Registra' ]"
-        [keys]="['Sistema_Id','Sistema_Nombre', 'Sistema_Tipo', 'Fecha_Registro', 'Usuario_Registra']"
+        [keys]="['Sistema_Id','Sistema_Nombre', 'Tipo_Descripcion', 'Fecha_Registro', 'Usuario_Registra']"
         [data]="sistemasList"
         [hasSearch]="true"
         [hasStatus]="true"
