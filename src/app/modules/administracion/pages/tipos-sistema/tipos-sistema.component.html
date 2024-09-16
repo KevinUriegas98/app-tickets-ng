@@ -1,3 +1,22 @@
+<div class="w-full p-4 bg-light-bg border border-light-border rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-bg dark:border-dark-border">
+    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+        <h5 class="text-xl font-medium text-light-text dark:text-dark-text">Tipos Sistema | Formulario</h5>
+        <div class="grid md:grid-cols-2 md:gap-9">
+            <div class="relative z-0 w-full mb-5 group">
+                <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">*Nombre de tipo</label>
+                <input type="text" formControlName="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Soporte"/>
+                <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid">
+                    <p class="text-sm italic text-danger" *ngIf="form.get('descripcion')?.errors?.['required']">Nombre de Tipo Requerido*</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-light-border dark:border-dark-border">
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="btn">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
 <div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
     <app-custom-table
         tableHead="Tipos Sistemas | Tabla"
