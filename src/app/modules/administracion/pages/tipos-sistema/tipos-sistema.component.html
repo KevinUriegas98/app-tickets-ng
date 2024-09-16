@@ -1,1 +1,16 @@
-<p>tipos-sistema works!</p>
+<div class="relative overflow-x-auto shadow-md w-full p-4 sm:p-4 md:p-6 bg-light-bg border border-light-border rounded-lg dark:bg-dark-bg dark:border-dark-border mt-2">
+    <app-custom-table
+        tableHead="Tipos Sistemas | Tabla"
+        keyRow="TipoSistema_Id"
+        [headers]="['#','Descripcion']"
+        [keys]="['TipoSistema_Id','TipoSistema_Descripcion']"
+        [data]="tiposList"
+        [hasSearch]="true"
+        [hasStatus]="false"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editTipoSistema($event)"
+        (deleteEmit)="deleteTipoSistema($event)"
+    >
+    </app-custom-table>
+</div>

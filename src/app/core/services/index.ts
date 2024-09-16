@@ -4,3 +4,4 @@ export * from './ticket.service';
 export * from './sistema.service';
 export * from './modulo.service';
 export * from './tipo.service';
+export * from './tipos-sistema.service';

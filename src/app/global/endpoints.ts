@@ -38,3 +38,7 @@ export const tipos = {
   update: `${environment.urlBase}UpdateTipo`,
   delete: `${environment.urlBase}DeleteTipo`
 }
+
+export const tiposSistema = {
+  get: `${environment.urlBase}GetAllTiposSistemas` 
+}
