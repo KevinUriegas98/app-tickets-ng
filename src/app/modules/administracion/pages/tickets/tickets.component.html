@@ -75,8 +75,8 @@
     <app-custom-table
         tableHead="Tickets | Tabla"
         keyRow="Ticket_Id"
-        [headers]="['#Ticket', 'Descripción', 'Fecha', 'Módulo', 'Sistema', 'Estatus', 'Usuario Asigando', 'Usuario Registra' ]"
-        [keys]="['Ticket_Id','Ticket_Descripcion', 'Ticket_Fecha', 'Modulo_Nombre', 'Sistema_Nombre', 'Estatus_Nombre', 'Usuario_Asignado', 'Usuario_Registra']"
+        [headers]="['#Ticket', 'Titulo', 'Descripción', 'Fecha', 'Módulo', 'Sistema', 'Estatus', 'Usuario Asigando', 'Usuario Registra' ]"
+        [keys]="['Ticket_Id', 'Ticket_Titulo', 'Ticket_Descripcion', 'Ticket_Fecha', 'Modulo_Nombre', 'Sistema_Nombre', 'Estatus_Nombre', 'Usuario_Asignado', 'Usuario_Registra']"
         [data]="ticketsList"
         [hasSearch]="true"
         [hasStatus]="false"

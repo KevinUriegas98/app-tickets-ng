@@ -26,6 +26,7 @@ export type TicketEstatusResponse = ApiResponse<TicketEstatusModel[]>;
 export interface TicketEstatusModel
 {
     Ticket_Id: number;
+    Ticket_Titulo: string;
     Ticket_Descripcion: string;
     Ticket_Comentarios: string;
     Ticket_Fecha: string;

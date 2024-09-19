@@ -6,7 +6,7 @@
         <!-- <app-icon-custom typeIcon="estatusTitle" [value]="status.id"></app-icon-custom> -->
       </h5>
     </div>
-    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700 ">
       <li class="py-3 sm:py-4">
         <div
           cdkDropList
@@ -15,37 +15,14 @@
           (cdkDropListDropped)="drop($event, i)"
           [id]="'cdk-drop-list-' + i"
           [ngClass]="(status.id == 1)?'estatusCreadoColumn':(status.id == 2)?'estatusAsignadoColumn':(status.id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
-          class="h-80 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
+          class="h-auto min-h-24 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
           <div *ngFor="let item of status.tickets" class="mb-2 relative" cdkDrag>
             <a (click)="openModal(item)" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-light-bg hover:bg-gray-50 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
               <span>
-                <fa-icon 
-                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
-                  [ngClass]="(item.Tipo_Ticket_Id == 1)?'text-red-600 dark:text-red-400':'text-blue-600 dark:text-blue-400'"
-                  aria-hidden="true" 
-                  [icon]="(item.Tipo_Ticket_Id == 1)?['fas', 'bug']:['fas', 'arrow-right-arrow-left']" 
-                  size="lg">
-                </fa-icon>
+                <app-icon-custom typeIcon="typeTicket" [value]="item.Tipo_Ticket_Id"></app-icon-custom>
               </span>
-              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Descripcion}} </span>
-              <span 
-                class="text-xs font-medium px-2.5 py-0.5 rounded border"
-                [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
-              >
-                <fa-icon 
-                  class="flex-shrink-0 w-5 h-5 transition duration-75 ease-in-out" 
-                  [ngClass]="(item.Estatus_Id == 1)?'estatusCreado':(item.Estatus_Id == 2)?'estatusAsignado':(item.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
-                  aria-hidden="true" 
-                  [icon]="(item.Estatus_Id == 1)?['fas', 'plus']:(item.Estatus_Id == 2)?['fas', 'user']:(item.Estatus_Id == 3)?['fas', 'screwdriver-wrench']:['fas', 'circle-check']" 
-                  size="lg">
-                </fa-icon>
-                {{ item.Estatus_Nombre }}
-              </span>
+              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Titulo}} </span>
             </a>
-            <!-- <div class="text-xs text-gray-400 absolute bottom-1 right-1">
-              <app-icon-custom typeIcon="custom" sizeIcon="sm"></app-icon-custom>
-              {{ item.Ticket_Fecha }}
-            </div> -->
         </div>
         </div>
       </li>
@@ -59,18 +36,18 @@
       <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
         Detalle de Ticket # {{ticket.Ticket_Id}}
         <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded border" [ngClass]="(ticket.Tipo_Ticket_Id == 1)?'bugStyle':'changeStyle'">
-          <!-- <app-icon-custom typeIcon="typeTicket" [value]="ticket.Tipo_Ticket_Id"></app-icon-custom> -->
+          <app-icon-custom typeIcon="typeTicket" [value]="ticket.Tipo_Ticket_Id"></app-icon-custom>
           {{ ticket.Tipo_Ticket_Nombre }}
         </span>
         <span 
           class="text-xs font-medium me-2 px-2.5 py-0.5 rounded border"
           [ngClass]="(ticket.Estatus_Id == 1)?'estatusCreado':(ticket.Estatus_Id == 2)?'estatusAsignado':(ticket.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
         >
-          <!-- <app-icon-custom typeIcon="estatus" [value]="ticket.Estatus_Id"></app-icon-custom> -->
+          <app-icon-custom typeIcon="estatus" [value]="ticket.Estatus_Id"></app-icon-custom>
           {{ ticket.Estatus_Nombre }}
         </span>
         <span *ngIf="ticket.Estatus_Id != 1" class="text-xs font-medium me-2 px-2.5 py-0.5 rounded border estatusCreado">
-          <!-- <app-icon-custom typeIcon="user"></app-icon-custom> -->
+          <app-icon-custom typeIcon="user"></app-icon-custom>
           {{ ticket.Usuario_Asignado }}
         </span>
       </h3>
