@@ -12,6 +12,7 @@ import { SistemaModel } from '@Models/Sistema';
 import { ModuloModel } from '@Models/Modulo';
 import { TipoTicketModel } from '@Models/Tipo';
 
+
 @Component({
   selector: 'app-tickets',
   standalone: true,

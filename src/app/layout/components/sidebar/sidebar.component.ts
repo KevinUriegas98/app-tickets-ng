@@ -3,21 +3,26 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon, faChevronDown, faChevronUp, faPanorama } from '@fortawesome/free-solid-svg-icons';
 import { FooterComponent } from "../footer/footer.component";
 
 import { images } from '@Constants';
 
+import { ModalSelectionComponent } from '../../../shared/components/modal-selection/modal-selection.component';
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, FontAwesomeModule, FooterComponent, CommonModule],
+  imports: [RouterModule, FontAwesomeModule, FooterComponent, CommonModule, ModalSelectionComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
   readonly images = images;
   private router = inject(Router);
+
+  isModalOpen = false;
+
 
   isSidebarOpen = false;
   isTicketsDropdownOpen = false;
@@ -37,7 +42,8 @@ export class SidebarComponent {
       faRightFromBracket,
       faSun,
       faCircleInfo,
-      faMoon
+      faMoon,
+      faPanorama
     );
     this.isBrowser = isPlatformBrowser(platformId);
     this.initializeTheme();
@@ -80,4 +86,15 @@ export class SidebarComponent {
   toggleConfigurationDropdown(){
     this.isConfigurationDropdownOpen = !this.isConfigurationDropdownOpen;
   }
+
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  // Cierra el modal
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
 }

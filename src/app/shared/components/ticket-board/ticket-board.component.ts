@@ -33,7 +33,6 @@ export class TicketBoardComponent {
   isModalOpen = false;
   ticket!: TicketEstatusModel;
   userProfile = localStorage.getItem('idPerfil');
-
   constructor() {}
 
   getConnectedDropListIds(index: number): string[] {
