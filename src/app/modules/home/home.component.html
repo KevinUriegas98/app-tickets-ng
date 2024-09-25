@@ -1,6 +1,7 @@
-<!-- <div class="flex items-center justify-center h-24 rounded bg-light-bg border border-light-border dark:bg-dark-bg dark:border-dark-border mb-4">
-   <h1 class="text-5xl font-extrabold text-light-text dark:text-dark-text">Bienvenido<small class="ms-2 font-semibold text-light-text dark:dark-text"></small></h1>
-</div> -->
 <div class="">
-   <app-ticket-board></app-ticket-board>
+   <app-ticket-board
+      [data]="tickets"
+      (changeTicket)="changeTicket($event)"
+   >
+   </app-ticket-board>
 </div>

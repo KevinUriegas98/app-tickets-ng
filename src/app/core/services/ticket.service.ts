@@ -26,6 +26,17 @@ export class TicketService {
       
   }
 
+  getTicketsBoard(): Observable<TicketEstatusResponse>
+  {
+    const httpOptions = { headers: this.headers };
+    return this.http.get<TicketEstatusResponse>(tickets.getTicketsBoard, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
+
   getTicketsEstatus(): Observable<TicketEstatusResponse>
   {
     const httpOptions = { headers: this.headers };

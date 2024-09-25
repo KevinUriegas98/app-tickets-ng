@@ -14,6 +14,7 @@ export const estatusTickets = {
 export const tickets = {
   insert: `${environment.urlBase}InsertTicket`,
   get: `${environment.urlBase}GetTicketEstatus`,
+  getTicketsBoard: `${environment.urlBase}GetAllEstatusDetail`,
   update:`${environment.urlBase}UpdateTicket`,
   delete: `${environment.urlBase}DeleteTicket`
 }
