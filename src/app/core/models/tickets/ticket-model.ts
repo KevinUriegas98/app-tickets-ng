@@ -8,6 +8,7 @@ export interface TicketInsertRequest {
     Ticket_Comentarios: string;
     Ticket_Titulo: string;
     Ticket_Estatus: number;
+    
 };
 
 export interface TicketUpdateRequest{

@@ -1,6 +1,6 @@
 import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
 import { CustomTableComponent } from '@Component/Table';
@@ -21,6 +21,8 @@ import { TipoTicketModel } from '@Models/Tipo';
   styleUrl: './tickets.component.css'
 })
 export class TicketsComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   constructor() { }
   private fb = inject(FormBuilder);
   private ticketService = inject(TicketService);
@@ -34,6 +36,7 @@ export class TicketsComponent {
   modulosList: ModuloModel[] = [];
   tiposList: TipoTicketModel[] = [];
   ticketsList:TicketEstatusModel[] = [];
+  selectedFiles: File[] = []; // Almacenar archivos seleccionados
 
 
   form = this.fb.nonNullable.group({
@@ -79,10 +82,37 @@ export class TicketsComponent {
     this.form.controls['modulo'].setValue(this.modulosBySistema.length > 0 ? this.modulosBySistema[0].Modulo_Id : 0)
   }
   
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles = Array.from(input.files); // Guardar los archivos seleccionados
+    }
+  }
+
   onSubmit(): void{
     if (this.form.valid) {
       const { id, tipo, sistema, modulo, descripcion, comentarios, titulo } = this.form.getRawValue();
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
+
+      const formData = new FormData();
+      formData.append('Usuario_Registra', usuarioRegistra.toString());
+      formData.append('Ticket_Tipo', tipo.toString());
+      formData.append('Modulo_Id', modulo.toString());
+      formData.append('Ticket_Descripcion', descripcion.trim());
+      formData.append('Ticket_Comentarios', comentarios.trim());
+      formData.append('Ticket_Titulo', titulo);
+      formData.append('Ticket_Estatus', '1');
+
+      // Agregar archivos seleccionados al FormData
+      this.selectedFiles.forEach((file, index) => {
+        formData.append('Ticket_Archivos', file); 
+      });
+      
+      console.log(this.selectedFiles);
+      
+
+      console.log(formData);
+      
       const request: TicketInsertRequest = {
         Usuario_Registra: usuarioRegistra,
         Ticket_Tipo: tipo,
@@ -106,7 +136,7 @@ export class TicketsComponent {
       }
 
       this.resetForm();
-      const serviceCall = id === 0 ?this.ticketService.insertTicket(request):this.ticketService.updateTicket(requestUpdate);
+      const serviceCall = id === 0 ?this.ticketService.insertTicket(formData):this.ticketService.updateTicket(requestUpdate);
       serviceCall.subscribe({
           next: (res: any) => {
             this.resetForm();
@@ -172,5 +202,7 @@ export class TicketsComponent {
       modulo: 0,
       descripcion: '',
     });
+    this.selectedFiles = [];
+    this.fileInput.nativeElement.value = '';
   }
 }

@@ -15,7 +15,7 @@ export class TicketService {
     this.headers = new HttpHeaders({})
   }
 
-  insertTicket(ticket: TicketInsertRequest): Observable<boolean> {
+  insertTicket(ticket: FormData): Observable<boolean> {
     const httpOptions = { headers: this.headers };
     return this.http.post<boolean>(`${tickets.insert}`, ticket, httpOptions)
       .pipe(

@@ -60,8 +60,7 @@
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <label for="text" class="block mb-2 text-sm font-medium text-light-text dark:text-dark-text">Agregar archivo</label>
-                <input type="file" class="block w-full file-input"/>
-
+                <input #fileInput type="file" (change)="onFileSelected($event)" multiple class="block w-full file-input"/>
             </div>
         </div> 
         <div class="border-t border-light-border dark:border-dark-border">
