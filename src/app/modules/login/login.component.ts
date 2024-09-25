@@ -73,13 +73,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      // this.router.navigate(['/home']);
       const { usuario, password } = this.form.getRawValue();
       const request: LoginRequest = {
         username: usuario,
         userpassword: password
       };
-      console.log(request)
       this.auth.auth(request)
         .subscribe({
           next: (res) => {
@@ -90,8 +88,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('idPerfil', data.Usuario.IdPerfil.toString());
             localStorage.setItem('usuario', data.Usuario.NombreUsuario);
             localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
-            localStorage.setItem('idSucursal', data.Usuario.IdSucursal.toString());
-            localStorage.setItem('sucursal', data.Usuario.NombreSucursal);
+            // localStorage.setItem('idSucursal', data.Usuario.IdSucursal.toString());
+            // localStorage.setItem('sucursal', data.Usuario.NombreSucursal);
             if (!localStorage.getItem('mode')) {
               localStorage.setItem('mode', 'light');
             }
@@ -100,10 +98,6 @@ export class LoginComponent implements OnInit {
             else {
               this.toastr.error('Usuario o contraseña incorrecto')
             }
-
-
-
-            console.log(data)
           },
           error: (err) => {
             this.toastr.error('Ha Ocurrido un Error', err);

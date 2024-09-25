@@ -40,13 +40,14 @@ export class HomeComponent {
       Ticket_Comentarios: dataTicket.Comentarios,
       Ticket_Estatus: estatusIdNew,
       Ticket_Titulo: dataTicket.Ticket_Titulo,
-      Usuario_Registra: 1
+      Usuario_Registra: 1,
+      Usuario_Asignado: Number(localStorage.getItem('idUsuario'))
     }
 
     const serviceCall = this.ticketService.updateTicket(requestUpdate);
     serviceCall.subscribe({
       next: (res: any) => {
-        console.log(res)
+        this.getTicketsBoard();
       },
       error: (err: any) => {
         console.log(err);

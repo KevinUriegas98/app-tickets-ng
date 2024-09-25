@@ -32,6 +32,7 @@ export class TicketBoardComponent {
   
   isModalOpen = false;
   ticket!: TicketEstatusModel;
+  userProfile = localStorage.getItem('idPerfil');
 
   constructor() {}
 
@@ -40,7 +41,6 @@ export class TicketBoardComponent {
   }
 
   drop(event: CdkDragDrop<any[]>, statusIndex: number) {
-    const destinoId = event.container.id;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -50,7 +50,7 @@ export class TicketBoardComponent {
         event.previousIndex,
         event.currentIndex
       );
-      this.changeTicket.emit({data:event.container.data, statusIndex})
+      this.changeTicket.emit({data:event.item.data, statusIndex})
     }
   }
 

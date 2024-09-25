@@ -100,7 +100,8 @@ export class TicketsComponent {
         Ticket_Comentarios: comentarios.trim(),
         Ticket_Estatus: 1,
         Ticket_Titulo: titulo,
-        Usuario_Registra: usuarioRegistra
+        Usuario_Registra: usuarioRegistra,
+        Usuario_Asignado:0
       }
 
       this.resetForm();

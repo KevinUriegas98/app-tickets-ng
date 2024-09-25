@@ -13,6 +13,7 @@ export interface TicketInsertRequest {
 export interface TicketUpdateRequest{
     Ticket_Id: number;
     Usuario_Registra: number;
+    Usuario_Asignado: number;
     Ticket_Tipo: number;
     Modulo_Id: number;
     Ticket_Descripcion: string;

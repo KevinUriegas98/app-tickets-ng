@@ -16,14 +16,14 @@
           [id]="'cdk-drop-list-' + i"
           [ngClass]="(status.Estatus_Id == 1)?'estatusCreadoColumn':(status.Estatus_Id == 2)?'estatusAsignadoColumn':(status.Estatus_Id == 3)?'estatusEnTratamiento':'estatusFinalizado'"
           class="h-auto min-h-24 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
-          <div *ngFor="let item of status.Tickets" class="mb-2 relative" cdkDrag>
+          <div *ngFor="let item of status.Tickets" class="mb-2 relative" cdkDrag [cdkDragData]="item" [cdkDragDisabled]="userProfile !== '1'">
             <a (click)="openModal(item)" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-light-bg hover:bg-gray-50 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
               <span>
                 <app-icon-custom typeIcon="typeTicket" [value]="item.Tipo_Ticket_Id"></app-icon-custom>
               </span>
               <span class="text-xs flex-1 ms-3">{{ item.Ticket_Titulo}} </span>
             </a>
-        </div>
+          </div>
         </div>
       </li>
     </ul>
