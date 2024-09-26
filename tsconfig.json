@@ -6,6 +6,7 @@
     "baseUrl": "./",
     "paths": {
       "@Global/*": ["src/app/global/*"],
+      "@Environment": ["src/environments/environment.ts"],
       "@Guards": ["src/app/core/guards/GuardPages.ts"],
       "@Constants*": ["src/app/global/constants.ts"],
       "@EndPoints*": ["src/app/global/endpoints.ts"],
