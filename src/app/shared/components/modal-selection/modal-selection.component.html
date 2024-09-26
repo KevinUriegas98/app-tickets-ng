@@ -3,16 +3,15 @@
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-5/12 p-6 z-10" role="dialog" aria-modal="true">
       <div class="flex justify-between items-center">
         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Fondo de pantalla</h3>
-        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" (click)="closeModal()">X</button>
+        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" (click)="closeModal()">
+          <app-icon-custom typeIcon="close" sizeIcon="xl"></app-icon-custom>
+        </button>
       </div>
 
       <!-- Grid con las dos opciones de imágenes -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4">
-        <div class="relative">
-          <img src="{{images.background1}}" class="w-full h-40 object-cover rounded-lg cursor-pointer" (click)="confirmImageSelection(images.background1)" />
-        </div>
-        <div class="relative">
-          <img src="{{images.background2}}" class="w-full h-40 object-cover rounded-lg cursor-pointer" (click)="confirmImageSelection(images.background2)" />
+        <div class="relative" *ngFor="let image of images">
+          <img [src]="image.src" class="w-full h-40 object-cover rounded-lg cursor-pointer" (click)="confirmImageSelection(image.src)" />
         </div>
       </div>
     </div>
