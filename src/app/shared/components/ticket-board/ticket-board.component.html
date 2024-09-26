@@ -16,7 +16,7 @@
           [id]="'cdk-drop-list-' + i"
           [ngClass]="(status.Estatus_Id == 1)?'estatusCreadoColumn':(status.Estatus_Id == 2)?'estatusAsignadoColumn':(status.Estatus_Id == 3)?'estatusEnTratamientoColumn':'estatusFinalizadoColumn'"
           class="h-auto min-h-24 rounded-lg p-3 border-dashed border-2 border-gray-300 dark:border-gray-400">
-          <div *ngFor="let item of status.Tickets" class="mb-2 relative" cdkDrag [cdkDragData]="item" [cdkDragDisabled]="userProfile !== '1'">
+          <div *ngFor="let item of status.Tickets" class="mb-2 h-auto relative" cdkDrag [cdkDragData]="item" [cdkDragDisabled]="ValidarTicket(item)">
             <a (click)="openModal(item)" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-light-bg hover:bg-gray-50 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
               <span>
                 <app-icon-custom typeIcon="typeTicket" [value]="item.Tipo_Ticket_Id"></app-icon-custom>
@@ -66,7 +66,7 @@
       </div>
       <div>
         <h5 class="text-md font-medium text-gray-900 dark:text-white">Descripción Ticket:</h5>
-        <p class="text-sm text-gray-500 dark:text-gray-400 "> {{ticket.Ticket_Descripcion}} </p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 break-all"> {{ticket.Ticket_Descripcion}} </p>
       </div>
       <div>
         <h5 class="text-md font-medium text-gray-900 dark:text-white">Fecha:</h5>
@@ -78,19 +78,26 @@
       </div>
       <div>
         <h5 class="text-md font-medium text-gray-900 dark:text-white">Adjuntos:</h5>
-        <a *ngFor="let adjunto of ticket.Adjuntos" [href]="adjunto.FileName" target="_blank"> 
+        <a *ngFor="let adjunto of ticket.Archivos" [href]="environment + ticket.Ticket_Id + '/' + adjunto.FileName" target="_blank"> 
           <app-icon-custom typeIcon="file" [value]="adjunto.Format" sizeIcon="xl"></app-icon-custom>
         </a>
       </div>
     </div>
-    <div *ngIf="ticket.Estatus_Id == 4">
+    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="finalizarTicket(ticket)">
       <h5 class="text-md font-medium text-gray-900 dark:text-white">Comentarios Dev:</h5>
-      <p class="text-sm text-gray-500 dark:text-gray-400 "> {{ticket.Ticket_Comentarios}} </p>
-    </div>
-    <div class="mt-3 flex justify-end">
-      <button class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" (click)="closeModal()">
-        Cerrar
-      </button>
-    </div>
+      <p class="text-sm text-gray-500 dark:text-gray-400" *ngIf="ticket.Estatus_Id == 4"> {{ticket.Ticket_Comentarios}} </p>
+      <textarea *ngIf="ticket.Estatus_Id == 3" formControlName="comentarios" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+      <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('comentarios')?.touched && form.get('comentarios')?.invalid">
+        <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
+      </div>
+      <div class="mt-3 flex justify-end">
+        <button class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 me-1" type="button" (click)="closeModal()">
+          Cerrar
+        </button>
+        <button *ngIf="ticket.Estatus_Id == 3" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">
+          Guardar
+        </button>
+      </div>
+    </form>
   </div>
 </div>

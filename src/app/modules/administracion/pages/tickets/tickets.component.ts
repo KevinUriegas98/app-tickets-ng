@@ -45,8 +45,8 @@ export class TicketsComponent {
     sistema: [0, [Validators.required, Validators.min(1)]],
     modulo: [0, [Validators.required, Validators.min(1)]],
     titulo: ['', [Validators.required, Validators.maxLength(50)]],
-    descripcion: ['', [Validators.required, Validators.maxLength(55)]],
-    comentarios: ['', [Validators.required, Validators.maxLength(255)]]
+    descripcion: ['', [Validators.required, Validators.maxLength(255)]],
+    comentarios: ['']
   });
 
   ngOnInit(): void {
@@ -89,9 +89,27 @@ export class TicketsComponent {
     }
   }
 
+  getFormValidationErrors() {
+    const errors: string[] = [];
+  
+    Object.keys(this.form.controls).forEach(key => {
+      const controlErrors = this.form.get(key)?.errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          errors.push(`${key}: ${errorKey}`);
+        });
+      }
+    });
+  
+    return errors;
+  }
+  
+
   onSubmit(): void{
+    console.log(this.form.valid)
+    console.log(this.getFormValidationErrors());
     if (this.form.valid) {
-      const { id, tipo, sistema, modulo, descripcion, comentarios, titulo } = this.form.getRawValue();
+      const { id, tipo, sistema, modulo, descripcion, titulo } = this.form.getRawValue();
       const usuarioRegistra = parseInt(localStorage.getItem('idUsuario')??'0')
 
       const formData = new FormData();
@@ -99,7 +117,7 @@ export class TicketsComponent {
       formData.append('Ticket_Tipo', tipo.toString());
       formData.append('Modulo_Id', modulo.toString());
       formData.append('Ticket_Descripcion', descripcion.trim());
-      formData.append('Ticket_Comentarios', comentarios.trim());
+      // formData.append('Ticket_Comentarios', comentarios.trim());
       formData.append('Ticket_Titulo', titulo);
       formData.append('Ticket_Estatus', '1');
 
@@ -118,7 +136,7 @@ export class TicketsComponent {
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
-        Ticket_Comentarios: comentarios.trim(),
+        Ticket_Comentarios: "",
         Ticket_Titulo: titulo,
         Ticket_Estatus: 1
       }
@@ -128,7 +146,7 @@ export class TicketsComponent {
         Ticket_Tipo: tipo,
         Modulo_Id: modulo,
         Ticket_Descripcion: descripcion.trim(),
-        Ticket_Comentarios: comentarios.trim(),
+        Ticket_Comentarios: "",
         Ticket_Estatus: 1,
         Ticket_Titulo: titulo,
         Usuario_Registra: usuarioRegistra,
@@ -147,6 +165,7 @@ export class TicketsComponent {
           }
         });
     } else {
+
       this.form.markAllAsTouched();
     }
   }

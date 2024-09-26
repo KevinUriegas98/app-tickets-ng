@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FaIconLibrary, FontAwesomeModule, SizeProp } from '@fortawesome/angular-fontawesome';
-import { faArrowRightArrowLeft, faBug, faCircleCheck, faClock, faDownload, faFileExcel, faFileImage, faFilePdf, faFileWord, faPen, faPlus, faScrewdriverWrench, faSearch, faTrashCan, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightArrowLeft, faBug, faCircleCheck, faClock, faDownload, faFileExcel, faFileImage, faFileLines, faFilePdf, faFileWord, faPen, faPlus, faScrewdriverWrench, faSearch, faTrashCan, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-icon-custom',  // Asegúrate de que este selector sea el mismo que el usado en el HTML
@@ -40,8 +40,8 @@ export class IconCustomComponent implements OnInit {
           this.color = 'fileImage';
           break;
         default:
-          this.icon = faFileImage;
-          this.color = 'fileImage';
+          this.icon = faFileLines;
+          this.color = 'fileLines';
           break;
       }
     } else if(this.typeIcon === "close"){
