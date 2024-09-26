@@ -14,7 +14,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LayoutComponent,
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     loadChildren: () => import('./modules/home/home.routes').then(m => m.routes),
     title: nameApp + 'Página Principal'
   },
