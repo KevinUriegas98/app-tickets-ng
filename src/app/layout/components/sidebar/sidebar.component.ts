@@ -25,7 +25,7 @@ export class SidebarComponent {
 
 
   isSidebarOpen = false;
-  isTicketsDropdownOpen = false;
+  isTicketsDropdownOpen = true;
   isConfigurationDropdownOpen = false;
   userName: string = "";
   savedTheme: any = ""
