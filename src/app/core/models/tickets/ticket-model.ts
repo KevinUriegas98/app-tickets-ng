@@ -39,8 +39,9 @@ export interface TicketEstatusModel
     Estatus_Id: number;
     Estatus_Nombre: string;
     Usuario_Registra: string;
+    Usuario_Asignado_Id: number;
     Usuario_Asignado: string;
-    Adjuntos: AdjuntoModel[];
+    Archivos: AdjuntoModel[];
 }
 
 interface AdjuntoModel
