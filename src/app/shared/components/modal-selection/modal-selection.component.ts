@@ -1,10 +1,9 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IconCustomComponent } from '@Component/IconCustom';
-import { images } from '@Global/constants';
+import { bgImages } from '@Global/constants';
 import { StorageService } from '../../services/storage.service';
 @Component({
   selector: 'app-custom-modal',
@@ -13,7 +12,7 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './modal-selection.component.html'
 })
 export class ModalSelectionComponent {
-    readonly images = images;
+    readonly images = bgImages;
     @Input() isModalOpen: boolean = false;
     @Output() close = new EventEmitter<void>();
   
