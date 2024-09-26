@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
     if (this.isBrowser) {
       const body = document.body;
       const isDarkMode = body.classList.contains('dark');
-      console.log("isDarkMode", isDarkMode);
       body.classList.toggle('dark', !isDarkMode);
       localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light');
     }
