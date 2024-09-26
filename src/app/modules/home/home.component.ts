@@ -4,7 +4,7 @@ import { TicketBoardComponent } from '@Component/TicketBoard';
 import { TicketEstatusModel, TicketUpdateRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { images } from '@Global/constants';
+import { bgImages, images } from '@Global/constants';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -13,19 +13,17 @@ import { images } from '@Global/constants';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  readonly images = images;
+  readonly images = bgImages;
   private ticketService = inject(TicketService);
 
   tickets: any[] = [];
-  background = localStorage.getItem("background") || images.background1;
+  background = localStorage.getItem("background") || bgImages[0];
 
   constructor(private storageService:StorageService) {
-      this.background = this.storageService.backgroundSource.getValue();
-  
-      // Suscríbete a los cambios en el background
-      this.storageService.background$.subscribe((bg) => {
-        this.background = bg;
-      });
+    this.background = this.storageService.backgroundSource.getValue();
+    this.storageService.background$.subscribe((bg) => {
+      this.background = bg;
+    });
   }
 
   ngOnInit(): void{
