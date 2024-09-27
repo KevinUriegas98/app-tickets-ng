@@ -87,8 +87,6 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('idPerfil', data.Usuario.IdPerfil.toString());
             localStorage.setItem('usuario', data.Usuario.NombreUsuario);
             localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
-            // localStorage.setItem('idSucursal', data.Usuario.IdSucursal.toString());
-            // localStorage.setItem('sucursal', data.Usuario.NombreSucursal);
             if (!localStorage.getItem('mode')) {
               localStorage.setItem('mode', 'light');
             }

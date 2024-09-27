@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IconCustomComponent } from '@Component/IconCustom';
 import { bgImages } from '@Global/constants';
-import { StorageService } from '../../services/storage.service';
+import { StorageService } from '@Service/StorageService';
 @Component({
   selector: 'app-custom-modal',
   standalone: true,

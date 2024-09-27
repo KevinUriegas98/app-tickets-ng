@@ -2,13 +2,12 @@ import { Component, inject, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import { ModalSelectionComponent } from "@Component/ModalSelection";
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon, faChevronDown, faChevronUp, faPanorama } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, faSun, faCircleInfo, faMoon, faChevronDown, faChevronUp, faPanorama, faChalkboard} from '@fortawesome/free-solid-svg-icons';
 import { FooterComponent } from "../footer/footer.component";
 
 import { images } from '@Constants';
-
-import { ModalSelectionComponent } from '../../../shared/components/modal-selection/modal-selection.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -43,7 +42,8 @@ export class SidebarComponent {
       faSun,
       faCircleInfo,
       faMoon,
-      faPanorama
+      faPanorama,
+      faChalkboard
     );
     this.isBrowser = isPlatformBrowser(platformId);
     this.initializeTheme();
