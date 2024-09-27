@@ -18,11 +18,6 @@ export const routes: Routes = [
                 title: nameApp + 'Estatus Tickets'
             },
             {
-                path: 'tickets',
-                loadChildren: () => import('./pages/tickets/tickets.routes').then(m => m.routes),
-                title: nameApp + 'Tickets'
-            },
-            {
                 path: 'sistemas',
                 loadChildren: () => import('./pages/sistemas/sistemas.routes').then(m => m.routes),
                 title: nameApp + 'Sistemas'
