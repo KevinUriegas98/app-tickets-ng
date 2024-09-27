@@ -76,6 +76,18 @@ export class TicketBoardComponent {
     }
   }
 
+  ValidarModal(data:any){
+    if(data.Estatus_Id == 3){
+      if(this.userProfile == '1' && data.Usuario_Asignado_Id == Number(this.userId)){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+
   finalizarTicket(ticket:any, statusIndex: number = 4){
     if (this.form.valid) {
       const { comentarios } = this.form.getRawValue();

@@ -3,7 +3,6 @@
     <div class="flex items-center justify-center">
       <h5 class="text-xl font-bold text-gray-900 dark:text-white">  
         {{ status.Estatus_Nombre }}
-        <!-- <app-icon-custom typeIcon="estatusTitle" [value]="status.id"></app-icon-custom> -->
       </h5>
     </div>
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700 ">
@@ -83,10 +82,10 @@
         </a>
       </div>
     </div>
-    <form class="space-y-6" [formGroup]="form" novalidate (ngSubmit)="finalizarTicket(ticket)">
+    <form [formGroup]="form" novalidate (ngSubmit)="finalizarTicket(ticket)">
       <h5 class="text-md font-medium text-gray-900 dark:text-white">Comentarios Dev:</h5>
       <p class="text-sm text-gray-500 dark:text-gray-400" *ngIf="ticket.Estatus_Id == 4"> {{ticket.Ticket_Comentarios}} </p>
-      <textarea *ngIf="ticket.Estatus_Id == 3" formControlName="comentarios" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+      <textarea *ngIf="ValidarModal(ticket)" formControlName="comentarios" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
       <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('comentarios')?.touched && form.get('comentarios')?.invalid">
         <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
       </div>
@@ -94,7 +93,7 @@
         <button class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 me-1" type="button" (click)="closeModal()">
           Cerrar
         </button>
-        <button *ngIf="ticket.Estatus_Id == 3" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">
+        <button *ngIf="ValidarModal(ticket)" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">
           Guardar
         </button>
       </div>
