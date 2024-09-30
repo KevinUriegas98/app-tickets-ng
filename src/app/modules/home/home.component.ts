@@ -49,7 +49,7 @@ export class HomeComponent {
       Ticket_Estatus: estatusIdNew,
       Ticket_Titulo: dataTicket.Ticket_Titulo,
       Usuario_Registra: 1,
-      Usuario_Asignado: data.Usuario_Asignado_Id
+      Usuario_Asignado: data.Usuario_Asignado
     }
 
     const serviceCall = this.ticketService.updateTicket(requestUpdate);
