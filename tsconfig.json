@@ -27,7 +27,9 @@
       "@Models/Sistema": ["src/app/core/models/sistemas"],
       "@Models/Modulo": ["src/app/core/models/modulos"],
       "@Models/Tipo": ["src/app/core/models/tipos"],
-      "@Models/TipoSistema": ["src/app/core/models/tipos-sistema"]
+      "@Models/TipoSistema": ["src/app/core/models/tipos-sistema"],
+      "@Models/Usuario": ["src/app/core/models/usuarios"]
+
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

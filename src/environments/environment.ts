@@ -5,8 +5,8 @@
 export const environment = {
   production: true,
   // urlBase: 'https://apiloteria.derkapps.com/api/',
-  urlBase: 'https://localhost:5001/api/',
-  url: 'https://localhost:5001/uploads/',
+  urlBase: 'https://localhost:63936/api/',
+  url: 'https://localhost:63936/uploads/',
 };
 
 /*

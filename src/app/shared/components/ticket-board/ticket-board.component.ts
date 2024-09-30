@@ -14,6 +14,10 @@ import { environment } from '@Environment';
 import { TicketEstatusModel } from '@Models/Ticket';
 import { IconCustomComponent } from "@Component/IconCustom";
 
+import { UsuarioService } from '@Services';
+import { UsuarioModel } from '@Models/Usuario';
+import { tick } from '@angular/core/testing';
+
 @Component({
   selector: 'app-ticket-board',
   standalone: true,
@@ -34,10 +38,27 @@ export class TicketBoardComponent {
   environment: any = environment.url;
 
   constructor() {}
-  
-  form = this.fb.nonNullable.group({
-    comentarios: ['',[Validators.required]]
+
+  private usuarioService = inject(UsuarioService);
+  usuariosList: UsuarioModel[] = [];
+
+  formComentarios = this.fb.nonNullable.group({
+    comentarios: ['',[Validators.required]],
   });
+
+  formUsuarioAsignado = this.fb.nonNullable.group({
+    usuarioAsignado: [0, [Validators.required]]
+  })
+
+  ngOnInit(): void {
+    this.getUsuarios();
+  }
+
+  getUsuarios(){
+    this.usuarioService.getUsuarios().subscribe((data) => {
+      this.usuariosList = data.response;
+    })
+  }
 
   getConnectedDropListIds(index: number): string[] {
     return this.data.map((_, index) => `cdk-drop-list-${index}`);
@@ -83,26 +104,50 @@ export class TicketBoardComponent {
       }else{
         return false;
       }
-    }else{
+    }
+    else if(data.Estatus_Id == 1 || data.Estatus_Id == 2)
+    {
+      if(this.userProfile == '1' && (data.Usuario_Asignado_Id == Number(this.userId) || data.Usuario_Asignado_Id == 0))
+      {
+        return true;
+      }
+      {
+        return false;
+      }
+    }
+    else{
       return false;
     }
   }
 
   finalizarTicket(ticket:any, statusIndex: number = 4){
-    if (this.form.valid) {
-      const { comentarios } = this.form.getRawValue();
+
+    if (this.formComentarios.valid) {
+      const { comentarios } = this.formComentarios.getRawValue();
       ticket.Comentarios = comentarios;
       this.changeTicket.emit({data:ticket, statusIndex});
       this.closeModal();
-    } else {
-      this.form.markAllAsTouched();
+    }
+    else if (this.formUsuarioAsignado.valid)
+    {
+      const {usuarioAsignado} = this.formUsuarioAsignado.getRawValue();
+      ticket.Usuario_Asignado_Id = usuarioAsignado;
+      statusIndex = 2;
+      this.changeTicket.emit({data:ticket, statusIndex});
+      this.closeModal();
+    }
+    else {
+      this.formComentarios.markAllAsTouched();
     }
   }
 
   openModal(data:any) {
     this.ticket = data;
-    this.form.patchValue({
+    this.formComentarios.patchValue({
       comentarios: data.Ticket_Comentarios
+    });
+    this.formUsuarioAsignado.patchValue({
+      usuarioAsignado: data.Usuario_Asignado_Id
     });
     this.isModalOpen = true;
   }

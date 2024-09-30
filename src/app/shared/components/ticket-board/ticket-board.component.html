@@ -82,13 +82,13 @@
         </a>
       </div>
     </div>
-    <form [formGroup]="form" novalidate (ngSubmit)="finalizarTicket(ticket)">
-      <h5 class="text-md font-medium text-gray-900 dark:text-white">Comentarios Dev:</h5>
-      <p class="text-sm text-gray-500 dark:text-gray-400" *ngIf="ticket.Estatus_Id == 4"> {{ticket.Ticket_Comentarios}} </p>
-      <textarea *ngIf="ValidarModal(ticket)" formControlName="comentarios" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
-      <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="form.get('comentarios')?.touched && form.get('comentarios')?.invalid">
-        <p class="text-sm italic text-danger" *ngIf="form.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
-      </div>
+    <form *ngIf="ticket.Estatus_Id == 3 || ticket.Estatus_Id == 4" [formGroup]="formComentarios" novalidate (ngSubmit)="finalizarTicket(ticket)">
+        <h5 class="text-md font-medium text-gray-900 dark:text-white">Comentarios Dev:</h5>
+        <p class="text-sm text-gray-500 dark:text-gray-400" *ngIf="ticket.Estatus_Id == 4"> {{ticket.Ticket_Comentarios}} </p>
+        <textarea *ngIf="ValidarModal(ticket)" formControlName="comentarios" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+        <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="formComentarios.get('comentarios')?.touched && formComentarios.get('comentarios')?.invalid">
+          <p class="text-sm italic text-danger" *ngIf="formComentarios.get('comentarios')?.errors?.['required']">Comentarios requeridos*</p>
+        </div>
       <div class="mt-3 flex justify-end">
         <button class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 me-1" type="button" (click)="closeModal()">
           Cerrar
@@ -98,5 +98,24 @@
         </button>
       </div>
     </form>
+    <form *ngIf="ticket.Estatus_Id == 1 || ticket.Estatus_Id == 2" [formGroup]="formUsuarioAsignado" novalidate (ngSubmit)="finalizarTicket(ticket)">
+        <h5 class="text-md font-medium text-gray-900 dark:text-white">Usuario Asignado:</h5>
+        <select formControlName="usuarioAsignado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+          <option [value]="0" disabled>Usuarios</option>
+          <option *ngFor="let usuario of usuariosList" [value]="usuario.Id">{{usuario.NombreUsuario}}</option>
+        </select>
+        <div class="flex justify-center text-sm italic text-sm text-red-600 dark:text-red-500" *ngIf="formComentarios.get('usuarioAsignado')?.touched && formComentarios.get('usuarioAsignado')?.invalid">
+          <p class="text-sm italic text-danger" *ngIf="formComentarios.get('usuarioAsignado')?.errors?.['required']">Usuario asignado requerido*</p>
+        </div>
+        <div class="mt-3 flex justify-end">
+          <button class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 me-1" type="button" (click)="closeModal()">
+            Cerrar
+          </button>
+          <button *ngIf="ValidarModal(ticket)" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" type="submit">
+            Guardar
+          </button>
+        </div>
+    </form>
   </div>
+
 </div>

@@ -46,3 +46,7 @@ export const tiposSistema = {
   update: `${environment.urlBase}UpdateTipoSistema`,
   delete: `${environment.urlBase}DeleteTipoSistema`
 }
+
+export const usuarios = {
+  get: `${environment.urlBase}GetUsuarios`
+}

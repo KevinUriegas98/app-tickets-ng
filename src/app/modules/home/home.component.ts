@@ -49,7 +49,7 @@ export class HomeComponent {
       Ticket_Estatus: estatusIdNew,
       Ticket_Titulo: dataTicket.Ticket_Titulo,
       Usuario_Registra: 1,
-      Usuario_Asignado: Number(localStorage.getItem('idUsuario'))
+      Usuario_Asignado: data.Usuario_Asignado_Id
     }
 
     const serviceCall = this.ticketService.updateTicket(requestUpdate);
