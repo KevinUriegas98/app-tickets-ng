@@ -20,7 +20,7 @@
               <span>
                 <app-icon-custom typeIcon="typeTicket" [value]="item.Tipo_Ticket_Id"></app-icon-custom>
               </span>
-              <span class="text-xs flex-1 ms-3">{{ item.Ticket_Titulo}} </span>
+              <div class="flex-1 ms-3"><span class="text-lg">{{ item.Sistema_Nombre }}</span><br/><span class="text-xs">{{item.Ticket_Titulo}}</span></div>
             </a>
           </div>
         </div>
