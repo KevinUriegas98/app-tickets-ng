@@ -40,6 +40,7 @@ export class HomeComponent {
     let dataTicket = data.data;
     let estatusIdNew = data.statusIndex;
 
+    
     const requestUpdate: TicketUpdateRequest = {
       Ticket_Id: dataTicket.Ticket_Id,
       Ticket_Tipo: dataTicket.Tipo_Ticket_Id,
@@ -48,9 +49,10 @@ export class HomeComponent {
       Ticket_Comentarios: dataTicket.Comentarios,
       Ticket_Estatus: estatusIdNew,
       Ticket_Titulo: dataTicket.Ticket_Titulo,
-      Usuario_Registra: 1,
-      Usuario_Asignado: data.Usuario_Asignado
+      Usuario_Registra: parseInt(localStorage.getItem('idUsuario')??'0'),
+      Usuario_Asignado: dataTicket.Usuario_Asignado_Id
     }
+    
 
     const serviceCall = this.ticketService.updateTicket(requestUpdate);
     serviceCall.subscribe({

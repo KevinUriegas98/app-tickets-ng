@@ -130,20 +130,18 @@ export class TicketBoardComponent {
     }
     else if (this.formUsuarioAsignado.valid)
     {
-      this.getUsuarios();
       const {usuarioAsignado} = this.formUsuarioAsignado.getRawValue();
       ticket.Usuario_Asignado_Id = usuarioAsignado;
-      console.log(usuarioAsignado)
-
-      const usuario = this.usuariosList.find(u => u.Id === usuarioAsignado);
-      console.log(usuario?.NombreUsuario)
-      ticket.Usuario_Asignado = usuario?.NombreUsuario;
+       
+      
       statusIndex = 2;
       this.changeTicket.emit({data:ticket, statusIndex});
       this.closeModal();
+
     }
     else {
       this.formComentarios.markAllAsTouched();
+      this.formUsuarioAsignado.markAllAsTouched();
     }
   }
 
