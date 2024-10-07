@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 import { tickets } from '@EndPoints';
 import { TicketEstatusResponse, TicketInsertRequest, TicketUpdateRequest } from '@Models/Ticket';
@@ -11,6 +11,10 @@ import { tick } from '@angular/core/testing';
 })
 export class TicketService {
   private headers: HttpHeaders;
+
+  private ticketCountSource = new BehaviorSubject<number>(0);
+  ticketCount = this.ticketCountSource.asObservable();
+
   constructor(private http: HttpClient) { 
     this.headers = new HttpHeaders({})
   }
@@ -68,5 +72,9 @@ export class TicketService {
           return res;
         })
       )
+  }
+
+  updateTicketCount(count: number) {
+    this.ticketCountSource.next(count);
   }
 }

@@ -1,6 +1,6 @@
 import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Output, ViewChild, EventEmitter } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
 import { CustomTableComponent } from '@Component/Table';
@@ -59,8 +59,10 @@ export class TicketsComponent {
   {
     this.ticketService.getTicketsEstatus().subscribe((data) => {
       this.ticketsList = data.response;
+      // this.ticketService.updateTicketCount(this.ticketsList.length);
     });
   }
+
   getTipos() {
     this.tipoService.getAllTipos().subscribe((data) => {
       this.tiposList = data.response;

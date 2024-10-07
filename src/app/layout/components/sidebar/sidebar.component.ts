@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, Inject, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { faHome, faFilePen, faRectangleList, faCircleUser, faRightFromBracket, f
 import { FooterComponent } from "../footer/footer.component";
 
 import { images } from '@Constants';
+import { TicketService } from '@Services';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,13 +23,15 @@ export class SidebarComponent {
 
   isModalOpen = false;
 
-
   isSidebarOpen = false;
   isTicketsDropdownOpen = true;
   isConfigurationDropdownOpen = false;
   userName: string = "";
   savedTheme: any = ""
   private isBrowser: boolean;
+
+  private ticketsService = inject(TicketService);
+  ticketsCount = 0;
 
   constructor(library: FaIconLibrary, @Inject(PLATFORM_ID) platformId: any) {
     library.addIcons(
@@ -48,6 +51,16 @@ export class SidebarComponent {
     this.isBrowser = isPlatformBrowser(platformId);
     this.initializeTheme();
     this.userName = (localStorage.getItem('nombrePersona'))??'Otro';
+  }
+
+  ngOnInit(): void {
+    this.getTicketsCount();
+  }
+
+  getTicketsCount(): void{
+    this.ticketsService.getTicketsEstatus().subscribe((data) => {
+      this.ticketsCount = data.response.length;
+    });
   }
 
   toggleDarkMode(): void {
@@ -97,4 +110,7 @@ export class SidebarComponent {
     this.isModalOpen = false;
   }
 
+  countTickets() {
+    this
+  }
 }
