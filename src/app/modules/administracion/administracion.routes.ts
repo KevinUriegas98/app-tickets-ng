@@ -36,6 +36,11 @@ export const routes: Routes = [
                 path: 'tipos-sistema',
                 loadChildren: () => import('./pages/tipos-sistema/tipos-sistema.routes').then(m => m.routes),
                 title: nameApp + 'Tipos Sistema'
+            },
+            {
+                path: 'usuario-sistema',
+                loadChildren: () => import('./pages/usuario-sistema/usuario-sistema.routes').then(m => m.routes),
+                title: nameApp + 'Usuario-Sistema'
             }
         ]
     },
