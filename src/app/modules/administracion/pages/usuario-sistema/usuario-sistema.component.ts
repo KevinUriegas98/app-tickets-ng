@@ -111,7 +111,22 @@ export class UsuarioSistemaComponent {
   }
 
   deleteUsuarioSistema(Id: number) {
-    console.log(Id);
+    this.sweetAlertService.confirm({
+      title: '¿Estás seguro que deseas eliminar permanentemente esta relación usuario-sistema?',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioSistemaService.deleteUsuarioSistema(Id)
+          .subscribe({
+            next: (res) => {
+              this.getAllUsuariosSistemas();
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
+    });
   }
   
 
