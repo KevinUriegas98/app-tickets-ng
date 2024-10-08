@@ -50,3 +50,10 @@ export const tiposSistema = {
 export const usuarios = {
   get: `${environment.urlBase}GetUsuarios`
 }
+
+export const usuariosSistemas = {
+  get: `${environment.urlBase}GetAllUsuariosSistemas`,
+  insert: `${environment.urlBase}InsertUsuarioSistema`,
+  update: `${environment.urlBase}UpdateUsuarioSistema`,
+  delete: `${environment.urlBase}DeleteUsuarioSistema`
+}
