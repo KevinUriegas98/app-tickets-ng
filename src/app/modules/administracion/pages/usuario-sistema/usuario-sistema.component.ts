@@ -103,7 +103,11 @@ export class UsuarioSistemaComponent {
   }
 
   editUsuarioSistema(data: UsuarioSistemaModel) {
-    console.log(data);
+    this.form.patchValue({
+      id: data.Id,
+      usuario: data.Usuario_Id,
+      sistema: data.Sistema_Id
+    })
   }
 
   deleteUsuarioSistema(Id: number) {

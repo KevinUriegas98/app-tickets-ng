@@ -17,6 +17,8 @@ export interface UsuarioSistemaUpdateRequest{
 }
 export interface UsuarioSistemaModel {
     Id: number;
+    Sistema_Id: number;
+    Usuario_Id: number;
     Sistema: string;
     Usuario: string;
     Estatus: number;
