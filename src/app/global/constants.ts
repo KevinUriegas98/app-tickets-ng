@@ -1,5 +1,6 @@
 export const images = {
   notfound: '../../assets/dist/image/not-found.png',
+  forbidden: '../../assets/dist/image/forbidden.png',
   logo: '../../assets/dist/image/logo.svg',
   logoNg: '../../assets/dist/image/logoNg.png',
   logoDos: '../../assets/dist/image/logo2.svg',
