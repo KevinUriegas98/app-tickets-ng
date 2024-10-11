@@ -7,9 +7,6 @@ import { RouterModule } from '@angular/router';
   selector: 'app-layout',
   standalone: true,
   imports: [SidebarComponent, HeaderComponent, RouterModule],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  templateUrl: './layout.component.html'
 })
-export class LayoutComponent {
-
-}
+export class LayoutComponent {}

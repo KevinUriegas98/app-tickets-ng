@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FaIconLibrary, FontAwesomeModule, SizeProp } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, SizeProp } from '@fortawesome/angular-fontawesome';
 import { faArrowRightArrowLeft, faBug, faCircleCheck, faClock, faDownload, faFileExcel, faFileImage, faFileLines, faFilePdf, faFileWord, faPen, faPlus, faScrewdriverWrench, faSearch, faTrashCan, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,9 +16,6 @@ export class IconCustomComponent implements OnInit {
 
   icon: any = "";
   color: string = "";
-
-  constructor() {
-  }
 
   ngOnInit(): void {
     if (this.typeIcon === "file") {

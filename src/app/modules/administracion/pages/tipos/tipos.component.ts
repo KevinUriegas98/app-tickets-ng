@@ -11,8 +11,7 @@ import { NgIf } from '@angular/common';
   selector: 'app-tipos',
   standalone: true,
   imports: [CustomTableComponent, ReactiveFormsModule, NgIf],
-  templateUrl: './tipos.component.html',
-  styleUrl: './tipos.component.css'
+  templateUrl: './tipos.component.html'
 })
 export class TiposComponent {
   constructor() {}
@@ -101,5 +100,6 @@ export class TiposComponent {
           }
         });
       }
-    });  }
+    });
+  }
 }

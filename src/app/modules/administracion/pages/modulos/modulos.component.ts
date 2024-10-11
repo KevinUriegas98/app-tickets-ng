@@ -15,8 +15,7 @@ import { SistemaModel } from '@Models/Sistema';
   selector: 'app-modulos',
   standalone: true,
   imports: [CustomTableComponent, NgIf, NgFor, ReactiveFormsModule],
-  templateUrl: './modulos.component.html',
-  styleUrl: './modulos.component.css'
+  templateUrl: './modulos.component.html'
 })
 export class ModulosComponent {
   constructor() { }
@@ -107,14 +106,14 @@ export class ModulosComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.moduloService.deleteModulo(Modulo_Id)
-          .subscribe({
-            next: (res) => {
-              this.getAllModulos();
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          });
+        .subscribe({
+          next: (res) => {
+            this.getAllModulos();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
       }
     });
   }

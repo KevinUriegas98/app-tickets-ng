@@ -15,8 +15,7 @@ import { UsuarioModel } from "@Models/Usuario";
   selector: 'app-usuario-sistema',
   standalone: true,
   imports: [ReactiveFormsModule, NgIf, NgFor, CustomTableComponent],
-  templateUrl: './usuario-sistema.component.html',
-  styleUrl: './usuario-sistema.component.css'
+  templateUrl: './usuario-sistema.component.html'
 })
 export class UsuarioSistemaComponent {
   constructor() { }
@@ -117,14 +116,14 @@ export class UsuarioSistemaComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioSistemaService.deleteUsuarioSistema(Id)
-          .subscribe({
-            next: (res) => {
-              this.getAllUsuariosSistemas();
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          });
+        .subscribe({
+          next: (res) => {
+            this.getAllUsuariosSistemas();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
       }
     });
   }

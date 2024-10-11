@@ -6,7 +6,6 @@ import { CustomTableComponent } from '@Component/Table';
 import { SweetAlertService } from '@Service/SweetAlert';
 import { ToastrService } from 'ngx-toastr';
 
-
 import { EstatusTicketInsertRequest, EstatusTicketModel } from '@Models/StatusTickets';
 import { EstatusTicketService } from '@Services';
 
@@ -56,29 +55,14 @@ export class EstatusTicketComponent {
         Estatus_Activo: activo
       };
       const serviceCall = id == 0 ?this.estatusTicketService.insertEstatusTicket(request):this.estatusTicketService.updateEstatusTicket(requestUpdate)
-      const mensaje = id == 0?"Estatus registrado exitosamente":"Estatus actualizado exitosamente";
       serviceCall.subscribe({
-          next: (res: any) => {
-            // Este es la ubicacion del archivo (src\app\core\interceptors\error.interceptor.ts)
-            // La alerta se dispara cuando el statusCode del service devuelve un 201, este 201 deberia de ir cuando se trata de un Insert, Update o Delete. O Cuando se trata de un 400.
-            // Los get deberian de ser un 200
-            // El contenido del mensaje viene desde el servicio del api
-            // try
-            // {
-            //     objectResponse.StatusCode = (int)HttpStatusCode.Created;
-            //     objectResponse.success = true;
-            //     objectResponse.message = "Estatus Actualizado Correctamente";
-            //     _estatusService.UpdateEstatus(req);
-            // }
-            // const data = res;
-            // this.toastr.success('Estatus registrado exitosamente');
-            this.toastr.success(mensaje);
-            this.resetForm();
-            this.getAllEstatus();
-          },
-          error: (err: any) => {
-            console.log(err);
-          }
+        next: (res: any) => {
+          this.resetForm();
+          this.getAllEstatus();
+        },
+        error: (err: any) => {
+          console.log(err);
+        }
         });
     } else {
       this.form.markAllAsTouched();

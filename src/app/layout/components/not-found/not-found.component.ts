@@ -6,8 +6,7 @@ import { images } from '@Constants';
   selector: 'app-not-found',
   standalone: true,
   imports: [],
-  templateUrl: './not-found.component.html',
-  styleUrl: './not-found.component.css'
+  templateUrl: './not-found.component.html'
 })
 export class NotFoundComponent {
   readonly images = images;

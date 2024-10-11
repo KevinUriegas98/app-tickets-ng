@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketBoardComponent } from '@Component/TicketBoard';
-import { TicketEstatusModel, TicketUpdateRequest } from '@Models/Ticket';
+import { TicketUpdateRequest } from '@Models/Ticket';
 import { TicketService } from '@Services';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { bgImages, images } from '@Global/constants';
@@ -9,8 +9,7 @@ import { bgImages, images } from '@Global/constants';
   selector: 'app-home',
   standalone: true,
   imports: [TicketBoardComponent, CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
   readonly images = bgImages;
@@ -39,7 +38,6 @@ export class HomeComponent {
   changeTicket(data:any){
     let dataTicket = data.data;
     let estatusIdNew = data.statusIndex;
-
     
     const requestUpdate: TicketUpdateRequest = {
       Ticket_Id: dataTicket.Ticket_Id,
@@ -52,7 +50,6 @@ export class HomeComponent {
       Usuario_Registra: parseInt(localStorage.getItem('idUsuario')??'0'),
       Usuario_Asignado: dataTicket.Usuario_Asignado_Id
     }
-    
 
     const serviceCall = this.ticketService.updateTicket(requestUpdate);
     serviceCall.subscribe({

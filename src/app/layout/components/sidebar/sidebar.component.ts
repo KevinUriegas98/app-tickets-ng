@@ -26,8 +26,9 @@ export class SidebarComponent {
   isSidebarOpen = false;
   isTicketsDropdownOpen = true;
   isConfigurationDropdownOpen = false;
-  userName: string = "";
-  savedTheme: any = ""
+  userName: string = localStorage.getItem('nombrePersona')||'';
+  userRole: string = localStorage.getItem('perfil') || '';
+  savedTheme: any = "";
   private isBrowser: boolean;
 
   private ticketsService = inject(TicketService);
@@ -50,7 +51,10 @@ export class SidebarComponent {
     );
     this.isBrowser = isPlatformBrowser(platformId);
     this.initializeTheme();
-    this.userName = (localStorage.getItem('nombrePersona'))??'Otro';
+  }
+
+  hasRole(roles: string[]): boolean {
+    return roles.includes(this.userRole);
   }
 
   ngOnInit(): void {
@@ -100,12 +104,10 @@ export class SidebarComponent {
     this.isConfigurationDropdownOpen = !this.isConfigurationDropdownOpen;
   }
 
-
   openModal() {
     this.isModalOpen = true;
   }
 
-  // Cierra el modal
   closeModal() {
     this.isModalOpen = false;
   }

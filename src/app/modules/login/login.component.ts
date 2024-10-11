@@ -16,7 +16,6 @@ import { LoginService } from '@Services';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
   standalone: true,
   imports: [ReactiveFormsModule, FontAwesomeModule, NgIf]
 })
@@ -85,6 +84,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', data.Token);
             localStorage.setItem('idUsuario', data.Usuario.Id.toString());
             localStorage.setItem('idPerfil', data.Usuario.IdPerfil.toString());
+            localStorage.setItem('perfil', data.Usuario.NombrePerfil.toString());
             localStorage.setItem('usuario', data.Usuario.NombreUsuario);
             localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
             if (!localStorage.getItem('mode')) {

@@ -12,8 +12,7 @@ import { SweetAlertService } from '@Service/SweetAlert';
   selector: 'app-tipos-sistema',
   standalone: true,
   imports: [CustomTableComponent, ReactiveFormsModule, NgIf],
-  templateUrl: './tipos-sistema.component.html',
-  styleUrl: './tipos-sistema.component.css'
+  templateUrl: './tipos-sistema.component.html'
 })
 export class TiposSistemaComponent {
   constructor() { }
@@ -87,14 +86,14 @@ export class TiposSistemaComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.tipoService.deleteTipoSistema(TipoSistema_Id)
-          .subscribe({
-            next: (res) => {
-              this.getAllTiposSistemas();
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          })
+        .subscribe({
+          next: (res) => {
+            this.getAllTiposSistemas();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       }
     })
   }

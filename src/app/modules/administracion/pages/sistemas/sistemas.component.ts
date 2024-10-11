@@ -104,14 +104,14 @@ export class SistemasComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.sistemaService.deleteSistema(Sistema_Id)
-          .subscribe({
-            next: (res) => {
-              this.getAllSistemas();
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          });
+        .subscribe({
+          next: (res) => {
+            this.getAllSistemas();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
       }
     });   
   }

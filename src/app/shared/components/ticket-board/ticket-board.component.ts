@@ -16,7 +16,6 @@ import { IconCustomComponent } from "@Component/IconCustom";
 
 import { UsuarioService } from '@Services';
 import { UsuarioModel } from '@Models/Usuario';
-import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-ticket-board',

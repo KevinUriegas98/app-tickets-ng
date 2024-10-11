@@ -16,7 +16,7 @@
         </ul>
 
         <!-- Tickets dropdown -->
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700" *ngIf="hasRole(['Administrador', 'Usuario'])">
             <li (click)="toggleTicketsDropdown()" class="text-gray-500 dark:text-gray-400 dropdown">
                 <span>
                     TICKETS
@@ -40,7 +40,7 @@
             </ul>
         </ul>
 
-        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700" *ngIf="hasRole(['Administrador'])">
             <li (click)="toggleConfigurationDropdown()" class="text-gray-500 dark:text-gray-400 dropdown">
                 CONFIGURACIÓN
                 <fa-icon [icon]="['fas', isConfigurationDropdownOpen ? 'chevron-up' : 'chevron-down']"></fa-icon>
